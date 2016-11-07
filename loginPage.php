@@ -1,5 +1,8 @@
-<!--login form taken from-->
-<!--http://bootsnipp.com/snippets/featured/google-style-login-extended-with-html5-localstorage-->
+<?php
+    include "includes/ensureNotAuthenticated.php";
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">

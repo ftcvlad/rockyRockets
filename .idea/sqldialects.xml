@@ -2,5 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="dbSrc:///5e5af712/0d4023e9-626f-4b37-9ed4-56b989156be5" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$" dialect="MySQL" />
   </component>
 </project>

@@ -2,3 +2,9 @@
     margin:auto;
     width:90%;
 }
+
+
+.panel-heading span{
+    color:red;
+    padding-left:20px;
+}

@@ -12,8 +12,9 @@ include "../includes/db.php";
 $query = "UPDATE staff SET Salary=? WHERE Id=?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("ii",$newSalary , $staffId);
-if ($stmt===false){//wrong type
+if ($stmt===false){//wrong type (if user modified js)
     http_response_code(404);
+    echo "wrong type";
     return;
 }
 
@@ -23,8 +24,9 @@ if ($stmt===false){//database disconnected or whatever
     return;
 }
 
-if ($connection->affected_rows===0){//wrong index
+if ($connection->affected_rows===0){//wrong index (if same value as before or user modified js)
     http_response_code(404);
+    echo "No rows were updated";
     return;
 }
 

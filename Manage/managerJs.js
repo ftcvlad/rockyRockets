@@ -35,14 +35,14 @@ function searchStaff(){
         error:function(jqXHR, status, errorText){
             if (jqXHR.status===500){
 
-                $(".panel-heading").append("<span style='color:red;'> database error</span>");
+                $(".panel-heading").append("<span > database error</span>");
             }
             else if (jqXHR.status === 401){
 
-                $(".panel-heading").append("<span style='color:red;'> "+jqXHR.responseText+"</span>");
+                $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
             }
             else if (jqXHR.status === 404){
-                $(".panel-heading").append("<span style='color:red;'>bad request</span>");
+                $(".panel-heading").append("<span >bad request</span>");
             }
         }
 
@@ -58,12 +58,13 @@ function addId(target){
 
 
     $("#salary").val($(':nth-child(5)', target).text() );
-
     $("#myModal").find("h4").text($(':nth-child(1)', target).text()+" "+$(':nth-child(2)', target).text()  );
 
-    $('.modal-footer').on('click', '#modalSubmitButton', function(){
-       //alert($(target).data("id"));
 
+
+
+    $('#modalSubmitButton').unbind('click').bind('click', function(){//if attaching  click, function called twice
+        $(".panel-heading").find('span').remove();
 
         $.ajax({
             type: 'POST',
@@ -72,22 +73,23 @@ function addId(target){
             dataType: "text",
             success: function(resultData) {
 
-
-            $(':nth-child(5)', target).text(resultData);
-
-
+                $(':nth-child(5)', target).text(resultData);
             },
             error:function(jqXHR, status, errorText){
+
                 if (jqXHR.status===500){
 
-                    $(".panel-heading").append("<span style='color:red;'> database error</span>");
+                    $(".panel-heading").append("<span > database error</span>");
+
+
                 }
                 else if (jqXHR.status === 401){
 
-                    $(".panel-heading").append("<span style='color:red;'> "+jqXHR.responseText+"</span>");
+                    $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
                 }
                 else if (jqXHR.status === 404){
-                    $(".panel-heading").append("<span style='color:red;'>bad request</span>");
+
+                    $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
                 }
             }
 
@@ -95,5 +97,13 @@ function addId(target){
 
 
 
+
+
+
+
     });
+
+
 }
+
+

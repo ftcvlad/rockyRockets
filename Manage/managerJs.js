@@ -22,7 +22,7 @@ function searchStaff(){
             }
             else{
                for (var i=0;i<allData.length;i++){
-                    $("tbody").append("<tr>  <td>"+allData[i].FirstName+"</td>" +
+                    $("tbody").append("<tr data-id=\'"+allData[i].Id+"\' data-toggle=\"modal\" data-target=\"#myModal\" onclick=\"addId(this)\">  <td>"+allData[i].FirstName+"</td>" +
                                             "<td>"+allData[i].LastName+"</td>"+
                                             "<td>"+allData[i].ContactNumber+"</td>"+
                                             "<td>"+allData[i].Position+"</td>"+
@@ -50,4 +50,50 @@ function searchStaff(){
 
 
 
+
+}
+
+function addId(target){
+
+
+
+    $("#salary").val($(':nth-child(5)', target).text() );
+
+    $("#myModal").find("h4").text($(':nth-child(1)', target).text()+" "+$(':nth-child(2)', target).text()  );
+
+    $('.modal-footer').on('click', '#modalSubmitButton', function(){
+       //alert($(target).data("id"));
+
+
+        $.ajax({
+            type: 'POST',
+            url: "updateSalary.php",
+            data: {newSalary:$("#salary").val(),staffId:$(target).data("id") },
+            dataType: "text",
+            success: function(resultData) {
+
+
+            $(':nth-child(5)', target).text(resultData);
+
+
+            },
+            error:function(jqXHR, status, errorText){
+                if (jqXHR.status===500){
+
+                    $(".panel-heading").append("<span style='color:red;'> database error</span>");
+                }
+                else if (jqXHR.status === 401){
+
+                    $(".panel-heading").append("<span style='color:red;'> "+jqXHR.responseText+"</span>");
+                }
+                else if (jqXHR.status === 404){
+                    $(".panel-heading").append("<span style='color:red;'>bad request</span>");
+                }
+            }
+
+        });
+
+
+
+    });
 }

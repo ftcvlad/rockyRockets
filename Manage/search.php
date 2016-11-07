@@ -32,7 +32,7 @@
 
 
     if ($positionCondition && $searchCondition){
-        $query = "SELECT FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
+        $query = "SELECT Id,FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
                 FROM staff_info
                 WHERE ((FirstName LIKE ? ESCAPE '!'|| LastName LIKE ? ESCAPE '!')  AND (Position=?))";
 
@@ -41,14 +41,14 @@
         $stmt->bind_param("sss",$escapedPrepCriterion , $escapedPrepCriterion,$position);
     }
     else if ($positionCondition){
-        $query = "SELECT FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
+        $query = "SELECT Id, FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
                 FROM staff_info
                 WHERE Position=?";
         $stmt = $connection->prepare($query);
         $stmt->bind_param("s",$position);
     }
     else if ($searchCondition){
-        $query = "SELECT FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
+        $query = "SELECT Id,FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
                 FROM staff_info
                 WHERE (FirstName LIKE ? ESCAPE '!'|| LastName LIKE ? ESCAPE '!')";
         $stmt = $connection->prepare($query);
@@ -56,7 +56,7 @@
 
     }
     else{
-        $query = "SELECT FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
+        $query = "SELECT Id, FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
                 FROM staff_info";
         $stmt = $connection->prepare($query);
     }

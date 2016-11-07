@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="logout.js"></script>
     <script src="managerJs.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <link rel="stylesheet" href="manageStyles.css">
 </head>
 <body>
@@ -62,6 +62,37 @@
 
         </tbody>
     </table>
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="input-group">
+                        <input type="number" id="salary" class="form-control" >
+                        <span class="input-group-addon" id="basic-addon2">Salary</span>
+
+                    </div><!-- /input-group -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalSubmitButton">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
 </div>
 
 

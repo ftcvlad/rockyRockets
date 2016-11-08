@@ -1,6 +1,12 @@
 <?php
 include "mIncludes/ensureAuthenticated.php";
 
+if (strcmp($_SESSION['user']->department, "Hr")!==0){
+    http_response_code(401);
+    echo "Only HR manager can edit staff";
+    die();
+}
+
 if (isset($_POST["newSalary"])){    $newSalary =  $_POST["newSalary"];}else{exit("something went wrong");}
 if (isset($_POST["staffId"])){$staffId =  $_POST["staffId"];}else{exit("something went wrong");}
 

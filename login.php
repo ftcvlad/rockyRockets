@@ -14,10 +14,18 @@ if ( strcmp($loginType,"customer")===0){
 }
 else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){
 
+    $query = " SELECT UserName, Password, Position , DepartmentType
+               FROM staff 
+               LEFT JOIN staff_department
+               ON staff_department.Id=staff.DepartmentId
+               WHERE (Position=? AND UserName=?)";
+
+
+    //$stmt = $connection->prepare("SELECT UserName, Password, Position FROM staff WHERE (Position=? AND UserName=?)");
+    $stmt = $connection->prepare($query);
 
 
 
-    $stmt = $connection->prepare("SELECT UserName, Password, Position FROM staff WHERE (Position=? AND UserName=?)");
     $stmt->bind_param("ss", $loginType, $username);
     $stmt->execute();
     $res = $stmt->get_result();
@@ -52,7 +60,7 @@ else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){
                 else if (strcmp($loginType, "seller")===0){
                     $redirPage = "seller.html";
                 }
-                $userObject = (object) array('username' => $username, 'position' => $loginType);
+                $userObject = (object) array('username' => $username, 'position' => $loginType, 'department'=>$row['DepartmentType']);
                 session_start();
                 $_SESSION['user'] = $userObject;
                 echo $redirPage;

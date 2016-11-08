@@ -8,3 +8,60 @@
     color:red;
     padding-left:20px;
 }
+
+.cornerButton{
+    position:absolute;
+
+    top:0;
+    width:20px;
+
+}
+
+.cornerButton.edit{
+    left:0;
+
+}
+
+.cornerButton.delete{
+    left:25px;
+
+}
+
+td{
+    position: relative;
+}
+
+td button{
+    padding:0;
+    border:0;
+    background-color:transparent;
+    display: none;
+}
+
+td button:hover{
+    background-color: red;
+}
+
+
+
+tr:hover .cornerButton{
+    display: inline;
+}
+
+#personalPageLink{
+    color: black;
+    text-decoration: none;
+}
+
+#personalPageLink p{
+    padding: 15px 0 15px 0;
+    margin:0;
+
+}
+
+
+
+
+.navbar-default .navbar-nav li a:hover,.navbar a:hover{
+    background-color: #dedede;
+}

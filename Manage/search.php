@@ -61,6 +61,8 @@
         $stmt = $connection->prepare($query);
     }
 
+    //bad error reporting upstairs :(
+
     $stmt->execute();
     $res = $stmt->get_result();
 
@@ -69,7 +71,11 @@
     while($r = $res->fetch_assoc()) {
         $rows[] = $r;
     }
-    print json_encode($rows);
+   // print json_encode($rows);
+
+
+$response = array('rowsArray' => $rows, 'managerDep' => $_SESSION['user']-> department );
+print json_encode($response);
 
 
 

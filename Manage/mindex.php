@@ -13,12 +13,12 @@
     <script src="logout.js"></script>
     <script src="managerJs.js"></script>
 
-    <link rel="stylesheet" href="manageStyles.css">
+
 </head>
 <body>
 
 <?php
-    include "../includes/header.php";
+    include "mincludes/header.php";
 ?>
 
 
@@ -59,6 +59,9 @@
             </tr>
         </thead>
         <tbody>
+
+
+
 
         </tbody>
     </table>

@@ -11,7 +11,7 @@
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="logout.js"></script>
-    <script src="managerJs.js"></script>
+    <script src="searchStaff.js"></script>
 
 
 </head>
@@ -41,7 +41,7 @@
             </select>
         </div>
 
-        <button type="button" class="btn btn-primary" onclick="searchStaff()">Primary</button>
+        <button type="button" class="btn btn-primary" onclick="searchStaff()">Find</button>
 
     </div>
 

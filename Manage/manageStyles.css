@@ -1,3 +1,5 @@
+/*search staff*/
+
 .panel{
     margin:auto;
     width:90%;
@@ -48,6 +50,10 @@ tr:hover .cornerButton{
     display: inline;
 }
 
+
+
+/*navbar*/
+
 #personalPageLink{
     color: black;
     text-decoration: none;
@@ -64,4 +70,20 @@ tr:hover .cornerButton{
 
 .navbar-default .navbar-nav li a:hover,.navbar a:hover{
     background-color: #dedede;
+}
+
+/*add staff*/
+
+.panel-body .row label.col-form-label:after{
+    content: "*";
+    color:red;
+}
+
+
+#dapartmentSelect{
+    font-family:"Courier New", Courier, monospace;
+}
+
+.errorLabel{
+    background:#ffd8a1;
 }

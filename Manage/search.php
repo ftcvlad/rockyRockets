@@ -1,6 +1,6 @@
 
 <?php
-    include "mIncludes/ensureAuthenticated.php";
+    include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
 
 
 
@@ -9,7 +9,7 @@
 
 
 
-    include "../includes/db.php";
+    include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
     $positionCondition = false;
     $searchCondition = false;
     //if position set

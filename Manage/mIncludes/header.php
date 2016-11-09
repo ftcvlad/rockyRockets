@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="manageStyles.css">
+<link rel="stylesheet" href="/Manage/manageStyles.css">
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -36,10 +36,11 @@
 
                     //here already authenticated
                     if (strcmp($_SESSION['user']->department,"Sales") ===0){
-                        echo "<li><a href='/Manage/mOrderItem.php'><span >Order item</span></a></li>";
+                        echo "<li><a href='/Manage/sales_specific/mCreateItem.php'><span >Create item</span></a></li>";
+                        echo "<li><a href='/Manage/sales_specific/mOrderItem.php'><span >Order item</span></a></li>";
                     }
                     else if (strcmp($_SESSION['user']->department,"Hr") ===0){
-                        echo "<li><a href='/Manage/mAddStaff.php'><span onclick=''>Add staff</span></a></li>";
+                        echo "<li><a href='/Manage/hr_specific/mAddStaff.php'><span onclick=''>Add staff</span></a></li>";
                     }
                     echo "<li><a href='/Manage/mindex.php'><span >Search staff</span></a></li>";
                     echo "<li><a><span onclick='logoutF();'>Logout</span></a></li>";

@@ -1,5 +1,5 @@
 <?php
-include "mIncludes/ensureAuthenticated.php";
+include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
 
 if (strcmp($_SESSION['user']->department, "Hr")!==0){
 
@@ -8,7 +8,7 @@ if (strcmp($_SESSION['user']->department, "Hr")!==0){
 }
 
 
-include "../includes/db.php";
+include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
 
 
 $query = "SELECT staff_department.Id, DepartmentType, LocationType, AddressLine1, Street, City, PostCode
@@ -35,7 +35,7 @@ $res = $stmt->get_result();
     <title>Manager area</title>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="logout.js"></script>
+    <script src="../logout.js"></script>
 
     <script src="mAddStaffJs.js"></script>
 
@@ -44,7 +44,7 @@ $res = $stmt->get_result();
 <body>
 
 <?php
-include "mincludes/header.php";
+include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
 ?>
 
 
@@ -55,39 +55,39 @@ include "mincludes/header.php";
 
 
         <div class="form-group row">
-            <label for="addNameInput" class="col-xs-2 col-form-label">Name</label>
+            <label for="addNameInput" class="col-xs-2 col-form-label mandatoryItem">Name</label>
             <div class="col-xs-10">
                 <input class="form-control validatableInput" type="text"  id="addNameInput" maxlength="20" placeholder="20 max" name="name">
             </div>
         </div>
         <div class="form-group row">
-            <label for="addSurnameInput" class="col-xs-2 col-form-label">Surname</label>
+            <label for="addSurnameInput" class="col-xs-2 col-form-label mandatoryItem">Surname</label>
             <div class="col-xs-10">
                 <input class="form-control validatableInput" type="text"  id="addSurnameInput" maxlength="20" placeholder="20 max" name="surname">
             </div>
         </div>
         <div class="form-group row">
-            <label for="addSalaryInput" class="col-xs-2 col-form-label">Salary</label>
+            <label for="addSalaryInput" class="col-xs-2 col-form-label mandatoryItem">Salary</label>
             <div class="col-xs-10">
                 <input class="form-control validatableInput" type="number"  id="addSalaryInput" name="salary">
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="addUsernameInput" class="col-xs-2 col-form-label">Username</label>
+            <label for="addUsernameInput" class="col-xs-2 col-form-label mandatoryItem">Username</label>
             <div class="col-xs-10">
                 <input class="form-control validatableInput" type="text"  id="addUsernameInput" maxlength="16" placeholder="16 max" name="username">
             </div>
         </div>
         <div class="form-group row">
-            <label for="addPasswordInput" class="col-xs-2 col-form-label">Temp password</label>
+            <label for="addPasswordInput" class="col-xs-2 col-form-label mandatoryItem">Temp password</label>
             <div class="col-xs-10">
                 <input class="form-control validatableInput" type="text"  id="addPasswordInput" maxlength="16" placeholder="16 max" name="password">
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-xs-2 col-form-label" id="posLabel">Employee type</label>
+            <label class="col-xs-2 col-form-label mandatoryItem" id="posLabel">Employee type</label>
             <div class="col-xs-10">
                 <label class="radio-inline"><input type="radio" name="position" value="manager">Manager</label>
                 <label class="radio-inline"><input type="radio" name="position" value="seller" >Seller</label>
@@ -96,7 +96,7 @@ include "mincludes/header.php";
         </div>
 
         <div class="form-group row">
-            <label class="col-xs-2 col-form-label" id="depLabel">Department</label>
+            <label class="col-xs-2 col-form-label mandatoryItem" id="depLabel">Department</label>
             <div class="col-xs-10">
                 <select class="form-control" id="dapartmentSelect" name="positionCriterion">
                     <option disabled selected value="-1" > -- select  -- </option>

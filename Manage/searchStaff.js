@@ -10,7 +10,7 @@ $(function(){
 
         $.ajax({
             type: 'POST',
-            url: "updateSalary.php",
+            url: "/Manage/hr_specific/updateSalary.php",
             data: {newSalary:$("#salary").val(),staffId:$(targetRow).data("id") },
             dataType: "text",
             success: function(resultData) {
@@ -53,7 +53,7 @@ function searchStaff(){
 
     $.ajax({
         type: 'POST',
-        url: "search.php",
+        url: "/Manage/search.php",
         data: {criterion:$("#criteria").val(),position:$("#posSel").val() },
         dataType: "text",
         success: function(resultData) {

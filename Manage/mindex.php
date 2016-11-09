@@ -1,5 +1,5 @@
 <?php
-    include "mIncludes/ensureAuthenticated.php";
+    include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
 ?>
 
 
@@ -18,7 +18,7 @@
 <body>
 
 <?php
-    include "mincludes/header.php";
+    include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
 ?>
 
 

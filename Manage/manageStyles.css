@@ -3,6 +3,7 @@
 .panel{
     margin:auto;
     width:90%;
+    margin-bottom: 30px;
 }
 
 
@@ -74,7 +75,7 @@ tr:hover .cornerButton{
 
 /*add staff*/
 
-.panel-body .row label.col-form-label:after{
+.mandatoryItem:after{
     content: "*";
     color:red;
 }
@@ -86,4 +87,30 @@ tr:hover .cornerButton{
 
 .errorLabel{
     background:#ffd8a1;
+}
+
+/*create item*/
+
+textarea{
+    resize: none;
+}
+
+
+
+.greyDiv {
+    display:none;
+    background-color:#eaeaea;
+}
+
+
+#racketFields input, #apparelFields input.form-control{
+    width:130px;
+}
+
+#racketFields label, #apparelFields label{
+    padding-left:20px;
+}
+
+#apparelFields  .radio-inline{
+    margin-left:10px;
 }

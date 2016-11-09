@@ -11,69 +11,70 @@
     <table id="5" parent="2" name="businesshours"/>
     <table id="6" parent="2" name="customer"/>
     <table id="7" parent="2" name="differentitem"/>
-    <table id="8" parent="2" name="itemcategory"/>
-    <table id="9" parent="2" name="location"/>
-    <table id="10" parent="2" name="location_has_differentitem"/>
-    <table id="11" parent="2" name="ordereditem"/>
-    <table id="12" parent="2" name="purchase"/>
-    <table id="13" parent="2" name="purchase_has_differentitem"/>
-    <table id="14" parent="2" name="racketattribute"/>
-    <table id="15" parent="2" name="racketmodel"/>
-    <table id="16" parent="2" name="staff"/>
-    <table id="17" parent="2" name="staff_department"/>
-    <table id="18" parent="2" name="staff_has_ordereditems"/>
-    <table id="19" parent="2" name="supplier"/>
-    <column id="20" parent="4" name="Id">
+    <table id="8" parent="2" name="location"/>
+    <table id="9" parent="2" name="location_has_differentitem"/>
+    <table id="10" parent="2" name="ordereditem"/>
+    <table id="11" parent="2" name="purchase"/>
+    <table id="12" parent="2" name="purchase_has_differentitem"/>
+    <table id="13" parent="2" name="racketattribute"/>
+    <table id="14" parent="2" name="staff"/>
+    <table id="15" parent="2" name="staff_department"/>
+    <table id="16" parent="2" name="staff_has_ordereditems"/>
+    <table id="17" parent="2" name="supplier"/>
+    <view id="18" parent="2" name="staff_info">
+      <Comment>VIEW</Comment>
+    </view>
+    <column id="19" parent="4" name="Id">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="21" parent="4" name="Size">
+    <column id="20" parent="4" name="Size">
       <DataType>varchar(10)|0</DataType>
     </column>
-    <column id="22" parent="4" name="Color">
+    <column id="21" parent="4" name="Color">
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="23" parent="4" name="ForMen">
+    <column id="22" parent="4" name="ForMen">
       <DataType>tinyint(1)|0</DataType>
     </column>
-    <key id="24" parent="4" name="PRIMARY">
+    <key id="23" parent="4" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="25" parent="5" name="Id">
+    <column id="24" parent="5" name="Id">
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="26" parent="5" name="LocationId">
+    <column id="25" parent="5" name="LocationId">
       <DataType>tinyint(3) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="27" parent="5" name="OpenTime">
+    <column id="26" parent="5" name="OpenTime">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="28" parent="5" name="CloseTime">
+    <column id="27" parent="5" name="CloseTime">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="5" name="DayOfWeek">
+    <column id="28" parent="5" name="DayOfWeek">
       <DataType>tinyint(3) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="30" parent="5" name="LocationId_UNIQUE">
+    <index id="29" parent="5" name="LocationId_UNIQUE">
       <ColNames>LocationId</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="31" parent="5" name="PRIMARY">
+    <key id="30" parent="5" name="PRIMARY">
       <ColNames>Id
 LocationId</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="32" parent="5" name="LocationId_UNIQUE">
+    <key id="31" parent="5" name="LocationId_UNIQUE">
       <ColNames>LocationId</ColNames>
       <UnderlyingIndexName>LocationId_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="33" parent="5" name="Hours_to_Location">
+    <foreign-key id="32" parent="5" name="Hours_to_Location">
       <ColNames>LocationId</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>location</RefTableName>
@@ -81,125 +82,105 @@ LocationId</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <column id="34" parent="6" name="Id">
+    <column id="33" parent="6" name="Id">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="35" parent="6" name="FirstName">
+    <column id="34" parent="6" name="FirstName">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="6" name="LastName">
+    <column id="35" parent="6" name="LastName">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="37" parent="6" name="AddressLine1">
+    <column id="36" parent="6" name="AddressLine1">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="38" parent="6" name="Street">
+    <column id="37" parent="6" name="Street">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="39" parent="6" name="City">
+    <column id="38" parent="6" name="City">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="40" parent="6" name="PostCode">
+    <column id="39" parent="6" name="PostCode">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="41" parent="6" name="UserName">
+    <column id="40" parent="6" name="UserName">
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="42" parent="6" name="Password">
+    <column id="41" parent="6" name="Password">
       <DataType>varchar(45)|0</DataType>
     </column>
-    <index id="43" parent="6" name="CustomerID_UNIQUE">
+    <index id="42" parent="6" name="CustomerID_UNIQUE">
       <ColNames>Id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="44" parent="6" name="PRIMARY">
+    <key id="43" parent="6" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="45" parent="6" name="CustomerID_UNIQUE">
+    <key id="44" parent="6" name="CustomerID_UNIQUE">
       <ColNames>Id</ColNames>
       <UnderlyingIndexName>CustomerID_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="46" parent="7" name="Id">
+    <column id="45" parent="7" name="Id">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="47" parent="7" name="AttributeId">
-      <DataType>int(10) unsigned|0</DataType>
+    <column id="46" parent="7" name="Description">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="47" parent="7" name="Brand">
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="48" parent="7" name="Discount">
+      <DataType>tinyint(3) unsigned|0</DataType>
+    </column>
+    <column id="49" parent="7" name="Image">
+      <DataType>blob|0</DataType>
+    </column>
+    <column id="50" parent="7" name="SupplierId">
+      <DataType>tinyint(3) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="48" parent="7" name="Price£">
+    <column id="51" parent="7" name="SuppliersItemCode">
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="52" parent="7" name="Category">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="7" name="Price">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="49" parent="7" name="Description">
-      <DataType>text|0</DataType>
-    </column>
-    <column id="50" parent="7" name="Brand">
-      <DataType>varchar(45)|0</DataType>
-    </column>
-    <column id="51" parent="7" name="Discount">
-      <DataType>tinyint(3) unsigned|0</DataType>
-    </column>
-    <column id="52" parent="7" name="Image">
-      <DataType>blob|0</DataType>
-    </column>
-    <column id="53" parent="7" name="AvailableOline">
+    <column id="54" parent="7" name="AvailableOnline">
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="54" parent="7" name="SupplierId">
-      <DataType>tinyint(3) unsigned|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="55" parent="7" name="SuppliersItemCode">
-      <DataType>varchar(45)|0</DataType>
-    </column>
-    <column id="56" parent="7" name="itemName">
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="57" parent="7" name="AttributeId_UNIQUE">
-      <ColNames>AttributeId</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <index id="58" parent="7" name="Id_UNIQUE">
+    <index id="55" parent="7" name="Id_UNIQUE">
       <ColNames>Id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="59" parent="7" name="SupplierId_UNIQUE">
+    <index id="56" parent="7" name="to_Supplier_idx">
       <ColNames>SupplierId</ColNames>
-      <Unique>1</Unique>
     </index>
-    <index id="60" parent="7" name="toItemCategory_idx">
-      <ColNames>itemName</ColNames>
-    </index>
-    <key id="61" parent="7" name="PRIMARY">
+    <key id="57" parent="7" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="62" parent="7" name="AttributeId_UNIQUE">
-      <ColNames>AttributeId</ColNames>
-      <UnderlyingIndexName>AttributeId_UNIQUE</UnderlyingIndexName>
-    </key>
-    <key id="63" parent="7" name="Id_UNIQUE">
+    <key id="58" parent="7" name="Id_UNIQUE">
       <ColNames>Id</ColNames>
       <UnderlyingIndexName>Id_UNIQUE</UnderlyingIndexName>
     </key>
-    <key id="64" parent="7" name="SupplierId_UNIQUE">
-      <ColNames>SupplierId</ColNames>
-      <UnderlyingIndexName>SupplierId_UNIQUE</UnderlyingIndexName>
-    </key>
-    <foreign-key id="65" parent="7" name="Item_To_Supplier">
+    <foreign-key id="59" parent="7" name="to_Supplier">
       <ColNames>SupplierId</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>supplier</RefTableName>
@@ -207,117 +188,73 @@ LocationId</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <foreign-key id="66" parent="7" name="toItemCategory">
-      <ColNames>itemName</ColNames>
-      <RefSchemaName>16ac3d13</RefSchemaName>
-      <RefTableName>itemcategory</RefTableName>
-      <RefColNames>ItemName</RefColNames>
-      <OnUpdate>no-action</OnUpdate>
-      <OnDelete>no-action</OnDelete>
-    </foreign-key>
-    <foreign-key id="67" parent="7" name="to_Apparel">
-      <ColNames>AttributeId</ColNames>
-      <RefSchemaName>16ac3d13</RefSchemaName>
-      <RefTableName>apparelattribute</RefTableName>
-      <RefColNames>Id</RefColNames>
-      <OnUpdate>no-action</OnUpdate>
-      <OnDelete>no-action</OnDelete>
-    </foreign-key>
-    <foreign-key id="68" parent="7" name="to_Racket">
-      <ColNames>AttributeId</ColNames>
-      <RefSchemaName>16ac3d13</RefSchemaName>
-      <RefTableName>racketattribute</RefTableName>
-      <RefColNames>Id</RefColNames>
-      <OnUpdate>no-action</OnUpdate>
-      <OnDelete>no-action</OnDelete>
-    </foreign-key>
-    <column id="69" parent="8" name="ItemName">
-      <DataType>varchar(15)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="70" parent="8" name="Category">
-      <DataType>varchar(10)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="71" parent="8" name="Id_UNIQUE">
-      <ColNames>ItemName</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="72" parent="8" name="PRIMARY">
-      <ColNames>ItemName</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="73" parent="8" name="Id_UNIQUE">
-      <ColNames>ItemName</ColNames>
-      <UnderlyingIndexName>Id_UNIQUE</UnderlyingIndexName>
-    </key>
-    <column id="74" parent="9" name="Id">
+    <column id="60" parent="8" name="Id">
       <DataType>tinyint(3) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="75" parent="9" name="Type">
+    <column id="61" parent="8" name="AddressLine1">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="8" name="Street">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="8" name="City">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="8" name="PostCode">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="8" name="AreaSqM">
+      <DataType>smallint(5) unsigned|0</DataType>
+    </column>
+    <column id="66" parent="8" name="LocationType">
       <DataType>varchar(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="76" parent="9" name="AddressLine1">
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="77" parent="9" name="Street">
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="78" parent="9" name="City">
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="79" parent="9" name="PostCode">
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="80" parent="9" name="AreaSqM">
-      <DataType>smallint(5) unsigned|0</DataType>
-    </column>
-    <index id="81" parent="9" name="Shop_ID_UNIQUE">
+    <index id="67" parent="8" name="Shop_ID_UNIQUE">
       <ColNames>Id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="82" parent="9" name="PRIMARY">
+    <key id="68" parent="8" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="83" parent="9" name="Shop_ID_UNIQUE">
+    <key id="69" parent="8" name="Shop_ID_UNIQUE">
       <ColNames>Id</ColNames>
       <UnderlyingIndexName>Shop_ID_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="84" parent="10" name="Location_Id">
+    <column id="70" parent="9" name="Location_Id">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="85" parent="10" name="ItemKind_Id">
+    <column id="71" parent="9" name="ItemKind_Id">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="86" parent="10" name="Quantity">
+    <column id="72" parent="9" name="Quantity">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="87" parent="10" name="ShelfNumber">
+    <column id="73" parent="9" name="ShelfNumber">
       <DataType>mediumint(8) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="88" parent="10" name="fk_Location_has_ItemKind_ItemKind1_idx">
+    <index id="74" parent="9" name="fk_Location_has_ItemKind_ItemKind1_idx">
       <ColNames>ItemKind_Id</ColNames>
     </index>
-    <index id="89" parent="10" name="fk_Location_has_ItemKind_Location1_idx">
+    <index id="75" parent="9" name="fk_Location_has_ItemKind_Location1_idx">
       <ColNames>Location_Id</ColNames>
     </index>
-    <key id="90" parent="10" name="PRIMARY">
+    <key id="76" parent="9" name="PRIMARY">
       <ColNames>Location_Id
 ItemKind_Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="91" parent="10" name="fk_Location_has_ItemKind_ItemKind1">
+    <foreign-key id="77" parent="9" name="fk_Location_has_ItemKind_ItemKind1">
       <ColNames>ItemKind_Id</ColNames>
       <RefSchemaName>mydb</RefSchemaName>
       <RefTableName>differentitem</RefTableName>
@@ -325,7 +262,7 @@ ItemKind_Id</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <foreign-key id="92" parent="10" name="fk_Location_has_ItemKind_Location1">
+    <foreign-key id="78" parent="9" name="fk_Location_has_ItemKind_Location1">
       <ColNames>Location_Id</ColNames>
       <RefSchemaName>mydb</RefSchemaName>
       <RefTableName>location</RefTableName>
@@ -333,55 +270,55 @@ ItemKind_Id</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <column id="93" parent="11" name="Id">
+    <column id="79" parent="10" name="Id">
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="94" parent="11" name="Quantity">
+    <column id="80" parent="10" name="Quantity">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="95" parent="11" name="ItemReceived">
+    <column id="81" parent="10" name="ItemReceived">
       <DataType>tinyint(1)|0</DataType>
     </column>
-    <column id="96" parent="11" name="ItemId">
+    <column id="82" parent="10" name="ItemId">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="97" parent="11" name="StaffId">
+    <column id="83" parent="10" name="StaffId">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="98" parent="11" name="ItemId_UNIQUE">
+    <index id="84" parent="10" name="ItemId_UNIQUE">
       <ColNames>ItemId</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="99" parent="11" name="Quantity_UNIQUE">
+    <index id="85" parent="10" name="Quantity_UNIQUE">
       <ColNames>Quantity</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="100" parent="11" name="StaffId_UNIQUE">
+    <index id="86" parent="10" name="StaffId_UNIQUE">
       <ColNames>StaffId</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="101" parent="11" name="PRIMARY">
+    <key id="87" parent="10" name="PRIMARY">
       <ColNames>Id
 ItemId</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="102" parent="11" name="ItemId_UNIQUE">
+    <key id="88" parent="10" name="ItemId_UNIQUE">
       <ColNames>ItemId</ColNames>
       <UnderlyingIndexName>ItemId_UNIQUE</UnderlyingIndexName>
     </key>
-    <key id="103" parent="11" name="Quantity_UNIQUE">
+    <key id="89" parent="10" name="Quantity_UNIQUE">
       <ColNames>Quantity</ColNames>
       <UnderlyingIndexName>Quantity_UNIQUE</UnderlyingIndexName>
     </key>
-    <key id="104" parent="11" name="StaffId_UNIQUE">
+    <key id="90" parent="10" name="StaffId_UNIQUE">
       <ColNames>StaffId</ColNames>
       <UnderlyingIndexName>StaffId_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="105" parent="11" name="kkk">
+    <foreign-key id="91" parent="10" name="kkk">
       <ColNames>ItemId</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>differentitem</RefTableName>
@@ -389,32 +326,32 @@ ItemId</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <column id="106" parent="12" name="Id">
+    <column id="92" parent="11" name="Id">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="107" parent="12" name="Date">
+    <column id="93" parent="11" name="Date">
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="108" parent="12" name="CustomerID">
+    <column id="94" parent="11" name="CustomerID">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="109" parent="12" name="Status">
+    <column id="95" parent="11" name="Status">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="110" parent="12" name="PurchaseToCustomer_idx">
+    <index id="96" parent="11" name="PurchaseToCustomer_idx">
       <ColNames>CustomerID</ColNames>
     </index>
-    <key id="111" parent="12" name="PRIMARY">
+    <key id="97" parent="11" name="PRIMARY">
       <ColNames>Id
 CustomerID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="112" parent="12" name="PurchaseToCustomer">
+    <foreign-key id="98" parent="11" name="PurchaseToCustomer">
       <ColNames>CustomerID</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>customer</RefTableName>
@@ -422,29 +359,29 @@ CustomerID</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <column id="113" parent="13" name="Quantity">
+    <column id="99" parent="12" name="Quantity">
       <DataType>tinyint(3) unsigned|0</DataType>
     </column>
-    <column id="114" parent="13" name="ItemId">
+    <column id="100" parent="12" name="ItemId">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="115" parent="13" name="PurchaseId">
+    <column id="101" parent="12" name="PurchaseId">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="116" parent="13" name="PIToPurchase_idx">
+    <index id="102" parent="12" name="PIToPurchase_idx">
       <ColNames>PurchaseId</ColNames>
     </index>
-    <index id="117" parent="13" name="PurchasedItemToItem_idx">
+    <index id="103" parent="12" name="PurchasedItemToItem_idx">
       <ColNames>ItemId</ColNames>
     </index>
-    <key id="118" parent="13" name="PRIMARY">
+    <key id="104" parent="12" name="PRIMARY">
       <ColNames>ItemId
 PurchaseId</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="119" parent="13" name="toDifferentItem">
+    <foreign-key id="105" parent="12" name="toDifferentItem">
       <ColNames>ItemId</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>differentitem</RefTableName>
@@ -452,7 +389,7 @@ PurchaseId</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <foreign-key id="120" parent="13" name="toPurchase">
+    <foreign-key id="106" parent="12" name="toPurchase">
       <ColNames>PurchaseId</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>purchase</RefTableName>
@@ -460,149 +397,99 @@ PurchaseId</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <column id="121" parent="14" name="Id">
+    <column id="107" parent="13" name="Id">
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="122" parent="14" name="Model">
-      <DataType>varchar(10)|0</DataType>
+    <column id="108" parent="13" name="Balance">
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="109" parent="13" name="Weight">
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="110" parent="13" name="Sport">
+      <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="123" parent="14" name="Balance">
-      <DataType>varchar(45)|0</DataType>
-    </column>
-    <column id="124" parent="14" name="Weight">
-      <DataType>varchar(45)|0</DataType>
-    </column>
-    <index id="125" parent="14" name="EquipmentID_UNIQUE">
+    <index id="111" parent="13" name="EquipmentID_UNIQUE">
       <ColNames>Id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="126" parent="14" name="to_Sport_idx">
-      <ColNames>Model</ColNames>
-    </index>
-    <key id="127" parent="14" name="PRIMARY">
+    <key id="112" parent="13" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="128" parent="14" name="EquipmentID_UNIQUE">
+    <key id="113" parent="13" name="EquipmentID_UNIQUE">
       <ColNames>Id</ColNames>
       <UnderlyingIndexName>EquipmentID_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="129" parent="14" name="to_Sport">
-      <ColNames>Model</ColNames>
-      <RefSchemaName>16ac3d13</RefSchemaName>
-      <RefTableName>racketmodel</RefTableName>
-      <RefColNames>Model</RefColNames>
-      <OnUpdate>no-action</OnUpdate>
-      <OnDelete>no-action</OnDelete>
-    </foreign-key>
-    <column id="130" parent="15" name="Model">
-      <DataType>varchar(10)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="131" parent="15" name="Sport">
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="132" parent="15" name="Id_UNIQUE">
-      <ColNames>Model</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <index id="133" parent="15" name="Sport_UNIQUE">
-      <ColNames>Sport</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="134" parent="15" name="PRIMARY">
-      <ColNames>Model</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="135" parent="15" name="Id_UNIQUE">
-      <ColNames>Model</ColNames>
-      <UnderlyingIndexName>Id_UNIQUE</UnderlyingIndexName>
-    </key>
-    <key id="136" parent="15" name="Sport_UNIQUE">
-      <ColNames>Sport</ColNames>
-      <UnderlyingIndexName>Sport_UNIQUE</UnderlyingIndexName>
-    </key>
-    <column id="137" parent="16" name="Id">
+    <column id="114" parent="14" name="Id">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="138" parent="16" name="FirstName">
+    <column id="115" parent="14" name="FirstName">
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="139" parent="16" name="LastName">
+    <column id="116" parent="14" name="LastName">
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="140" parent="16" name="DOB">
+    <column id="117" parent="14" name="DOB">
       <DataType>datetime|0</DataType>
     </column>
-    <column id="141" parent="16" name="ContactNumber">
+    <column id="118" parent="14" name="ContactNumber">
       <DataType>varchar(15)|0</DataType>
     </column>
-    <column id="142" parent="16" name="Email">
+    <column id="119" parent="14" name="Email">
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="143" parent="16" name="AddresLine1">
-      <DataType>varchar(45)|0</DataType>
-    </column>
-    <column id="144" parent="16" name="Street">
-      <DataType>varchar(45)|0</DataType>
-    </column>
-    <column id="145" parent="16" name="City">
-      <DataType>varchar(45)|0</DataType>
-    </column>
-    <column id="146" parent="16" name="Postcode">
-      <DataType>varchar(45)|0</DataType>
-    </column>
-    <column id="147" parent="16" name="UserName">
+    <column id="120" parent="14" name="UserName">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="148" parent="16" name="Password">
+    <column id="121" parent="14" name="Password">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="149" parent="16" name="Position">
+    <column id="122" parent="14" name="Position">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="150" parent="16" name="DepartmentId">
+    <column id="123" parent="14" name="DepartmentId">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="151" parent="16" name="Salary">
+    <column id="124" parent="14" name="Salary">
       <DataType>mediumint(8) unsigned|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <index id="152" parent="16" name="StaffUserName_UNIQUE">
+    <index id="125" parent="14" name="StaffUserName_UNIQUE">
       <ColNames>UserName</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="153" parent="16" name="Staff_ID_UNIQUE">
+    <index id="126" parent="14" name="Staff_ID_UNIQUE">
       <ColNames>Id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="154" parent="16" name="stuffToDep_idx">
+    <index id="127" parent="14" name="stuffToDep_idx">
       <ColNames>DepartmentId</ColNames>
     </index>
-    <key id="155" parent="16" name="PRIMARY">
+    <key id="128" parent="14" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="156" parent="16" name="StaffUserName_UNIQUE">
+    <key id="129" parent="14" name="StaffUserName_UNIQUE">
       <ColNames>UserName</ColNames>
       <UnderlyingIndexName>StaffUserName_UNIQUE</UnderlyingIndexName>
     </key>
-    <key id="157" parent="16" name="Staff_ID_UNIQUE">
+    <key id="130" parent="14" name="Staff_ID_UNIQUE">
       <ColNames>Id</ColNames>
       <UnderlyingIndexName>Staff_ID_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="158" parent="16" name="staffToDep">
+    <foreign-key id="131" parent="14" name="staffToDep">
       <ColNames>DepartmentId</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>staff_department</RefTableName>
@@ -610,42 +497,39 @@ PurchaseId</ColNames>
       <OnUpdate>update</OnUpdate>
       <OnDelete>delete</OnDelete>
     </foreign-key>
-    <column id="159" parent="17" name="Id">
+    <column id="132" parent="15" name="Id">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="160" parent="17" name="DepartmentType">
+    <column id="133" parent="15" name="DepartmentType">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="161" parent="17" name="nOfPeople">
-      <DataType>smallint(5) unsigned|0</DataType>
-    </column>
-    <column id="162" parent="17" name="PhoneNumber">
+    <column id="134" parent="15" name="PhoneNumber">
       <DataType>varchar(15)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="163" parent="17" name="LocationId">
+    <column id="135" parent="15" name="LocationId">
       <DataType>tinyint(3) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="164" parent="17" name="depToLocation_idx">
+    <index id="136" parent="15" name="depToLocation_idx">
       <ColNames>LocationId</ColNames>
     </index>
-    <index id="165" parent="17" name="Id_UNIQUE">
+    <index id="137" parent="15" name="Id_UNIQUE">
       <ColNames>Id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="166" parent="17" name="PRIMARY">
+    <key id="138" parent="15" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="167" parent="17" name="Id_UNIQUE">
+    <key id="139" parent="15" name="Id_UNIQUE">
       <ColNames>Id</ColNames>
       <UnderlyingIndexName>Id_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="168" parent="17" name="depToLocation">
+    <foreign-key id="140" parent="15" name="depToLocation">
       <ColNames>LocationId</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>location</RefTableName>
@@ -653,26 +537,26 @@ PurchaseId</ColNames>
       <OnUpdate>update</OnUpdate>
       <OnDelete>delete</OnDelete>
     </foreign-key>
-    <column id="169" parent="18" name="Staff_Id">
+    <column id="141" parent="16" name="Staff_Id">
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="170" parent="18" name="OrderedItems_Id">
+    <column id="142" parent="16" name="OrderedItems_Id">
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="171" parent="18" name="fk_Staff_has_OrderedItems_OrderedItems1_idx">
+    <index id="143" parent="16" name="fk_Staff_has_OrderedItems_OrderedItems1_idx">
       <ColNames>OrderedItems_Id</ColNames>
     </index>
-    <index id="172" parent="18" name="fk_Staff_has_OrderedItems_Staff1_idx">
+    <index id="144" parent="16" name="fk_Staff_has_OrderedItems_Staff1_idx">
       <ColNames>Staff_Id</ColNames>
     </index>
-    <key id="173" parent="18" name="PRIMARY">
+    <key id="145" parent="16" name="PRIMARY">
       <ColNames>Staff_Id
 OrderedItems_Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="174" parent="18" name="fk_Staff_has_OrderedItems_OrderedItems1">
+    <foreign-key id="146" parent="16" name="fk_Staff_has_OrderedItems_OrderedItems1">
       <ColNames>OrderedItems_Id</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>ordereditem</RefTableName>
@@ -680,7 +564,7 @@ OrderedItems_Id</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <foreign-key id="175" parent="18" name="fk_Staff_has_OrderedItems_Staff1">
+    <foreign-key id="147" parent="16" name="fk_Staff_has_OrderedItems_Staff1">
       <ColNames>Staff_Id</ColNames>
       <RefSchemaName>16ac3d13</RefSchemaName>
       <RefTableName>staff</RefTableName>
@@ -688,46 +572,93 @@ OrderedItems_Id</ColNames>
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <column id="176" parent="19" name="Id">
+    <column id="148" parent="17" name="Id">
       <DataType>tinyint(3) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="177" parent="19" name="Organization">
+    <column id="149" parent="17" name="Organization">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="178" parent="19" name="AddressLine1">
+    <column id="150" parent="17" name="AddressLine1">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="179" parent="19" name="Street">
+    <column id="151" parent="17" name="Street">
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="180" parent="19" name="City">
+    <column id="152" parent="17" name="City">
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="181" parent="19" name="Postcode">
+    <column id="153" parent="17" name="Postcode">
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="182" parent="19" name="Email">
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="183" parent="19" name="PhoneNumber">
+    <column id="154" parent="17" name="Email">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="184" parent="19" name="SupplierID_UNIQUE">
+    <column id="155" parent="17" name="PhoneNumber">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="156" parent="17" name="SupplierID_UNIQUE">
       <ColNames>Id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="185" parent="19" name="PRIMARY">
+    <key id="157" parent="17" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="186" parent="19" name="SupplierID_UNIQUE">
+    <key id="158" parent="17" name="SupplierID_UNIQUE">
       <ColNames>Id</ColNames>
       <UnderlyingIndexName>SupplierID_UNIQUE</UnderlyingIndexName>
     </key>
+    <column id="159" parent="18" name="Id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="160" parent="18" name="FirstName">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="161" parent="18" name="LastName">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="162" parent="18" name="ContactNumber">
+      <DataType>varchar(15)|0</DataType>
+    </column>
+    <column id="163" parent="18" name="Position">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="164" parent="18" name="Salary">
+      <DataType>mediumint(8) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="165" parent="18" name="DepartmentType">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="166" parent="18" name="LocationType">
+      <DataType>varchar(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="167" parent="18" name="AddressLine1">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="168" parent="18" name="City">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="169" parent="18" name="PostCode">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="170" parent="18" name="Street">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
   </database-model>
 </dataSource>

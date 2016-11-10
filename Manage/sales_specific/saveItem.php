@@ -7,24 +7,41 @@ if (strcmp($_SESSION['user']->department, "Sales")!==0){
     die();
 }
 
-
-
+var_dump($_POST);
+var_dump($_FILES);
 
 if (!empty($_POST["price"])){    $price =  $_POST["price"];}else{exit("bad input1");}
 if (!empty($_POST["description"])){$description =  $_POST["description"];}else{exit("bad input2");}
 if (!empty($_POST["supplierId"])){    $supplierId=  $_POST["supplierId"];}else{exit("bad input3");}
 if (!empty($_POST["category"])){    $category =  $_POST["category"];}else{exit("bad input4");}
-
-
-
 if (strcmp($category,"general")!==0 && strcmp($category, "racket")!==0 && strcmp($category, "apparel")!==0){
     http_response_code(404);
     echo "bad input";
     return;
 }
 
+
+
 $brand = empty($_POST["brand"])?NULL:$_POST["brand"];
 $itemCode = empty($_POST["itemCode"])?NULL:$_POST["itemCode"];
+
+//http://www.php-mysql-tutorial.com/wikis/mysql-tutorials/uploading-files-to-mysql-database.aspx -- to db
+//http://stackoverflow.com/questions/2879266/upload-file-with-php-and-save-path-to-sql -- move uploaded file
+//http://www.codingcage.com/2014/12/file-upload-and-view-with-php-and-mysql.html -- to FS
+if (empty($_FILES['file'])){
+    $image = NULL;
+}
+else if ( $_FILES['file']['error'] ) {
+
+    http_response_code(404);
+    echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+    return;
+}
+else {
+    $image = $_FILES['file'];
+}
+
+//$_POST["formData"]
 
 if (strcmp($category, "apparel")===0){
     $size = empty($_POST["size"])?NULL:$_POST["size"];
@@ -43,13 +60,14 @@ else if (strcmp($category, "racket")===0){
 
 
 
-
 include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
 
+//do as a single transaction -- rollback if die() before commit
+$connection->autocommit(FALSE);
 
 //INSERTING TO DIFFERENTITEM TABLE
-$query ="INSERT INTO differentitem (Price, Description,SupplierId,Category,Brand,SuppliersItemCode, AvailableOnline)
-        Values(?,?,?,?,?,?, false)";
+$query ="INSERT INTO differentitem (Price, Description,SupplierId,Category,Brand,SuppliersItemCode, AvailableOnline, Image)
+        Values(?,?,?,?,?,?, false,$image)";
 $stmt = $connection->prepare($query);
 $stmt ->bind_param("isisss",$price,$description,$supplierId,$category,$brand,$itemCode);
 if ($stmt===false){//wrong type (if user modified js)
@@ -97,6 +115,8 @@ if (strcmp($category,"general")!==0){
 
 
 }
+
+$connection->commit();
 
 echo "Saved successfully";
 

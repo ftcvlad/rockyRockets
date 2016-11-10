@@ -78,7 +78,7 @@ include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
             <label class="col-xs-2 col-form-label mandatoryItem" for="supplier">Supplier</label>
             <div class="col-xs-4">
                 <select class="form-control" id="supplier" >
-                    <option disabled selected value="-1" > -- select  -- </option>
+                    <option  selected value="-1" > -- select  -- </option>
                     <?php
                     while($r = $res->fetch_assoc()) {
                         $text =$r['Organization'].", ".$r['PostCode'];

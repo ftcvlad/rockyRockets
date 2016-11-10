@@ -30,7 +30,7 @@ $(function(){
 
 function saveItem(){
 
-    alert("wrassgfgh");
+
 
     $(".panel-body .row ").find("label").removeClass("errorLabel");
     $(".panel-heading").find('span').remove();
@@ -50,6 +50,7 @@ function saveItem(){
     }
 
     var supplierId = $("#supplier").val();
+
     if (supplierId==="-1"){
         $('.row label[for="supplier"]').addClass("errorLabel");
         noErrors= false;
@@ -63,6 +64,7 @@ function saveItem(){
     //and more input :(
     var brand = $("#brand").val().trim();
     var itemCode = $("#itemCode").val().trim();
+
 
 
     var category = $("#category").val();
@@ -87,13 +89,28 @@ function saveItem(){
     }
 
 
+    var form_data = new FormData();
+    $.each(data,function(key,input){
+        form_data.append(key,input);
+    });
+
+    //and image
+    var blobFile = document.getElementById("image").files[0];
+    if (blobFile!==undefined){
+        form_data.append('file', blobFile);
+
+    }
+
+
 
 
     $.ajax({
         type: 'POST',
         url: "saveItem.php",
-        data: data,
+        data: form_data,
         dataType: "text",
+        contentType: false,
+        processData: false,
         success: function(resultData) {
 
             $(".panel-heading").append("<span style='color:red;' > "+resultData+"</span>");

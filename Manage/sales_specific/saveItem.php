@@ -25,24 +25,6 @@ if (strcmp($category,"general")!==0 && strcmp($category, "racket")!==0 && strcmp
 $brand = empty($_POST["brand"])?NULL:$_POST["brand"];
 $itemCode = empty($_POST["itemCode"])?NULL:$_POST["itemCode"];
 
-//http://www.php-mysql-tutorial.com/wikis/mysql-tutorials/uploading-files-to-mysql-database.aspx -- to db
-//http://stackoverflow.com/questions/2879266/upload-file-with-php-and-save-path-to-sql -- move uploaded file
-//http://www.codingcage.com/2014/12/file-upload-and-view-with-php-and-mysql.html -- to FS
-if (empty($_FILES['file'])){
-    $image = NULL;
-}
-else if ( $_FILES['file']['error'] ) {
-
-    http_response_code(404);
-    echo 'Error: ' . $_FILES['file']['error'] . '<br>';
-    return;
-}
-else {
-    $image = $_FILES['file'];
-}
-
-//$_POST["formData"]
-
 if (strcmp($category, "apparel")===0){
     $size = empty($_POST["size"])?NULL:$_POST["size"];
     $color = empty($_POST["color"])?NULL:$_POST["color"];
@@ -58,6 +40,48 @@ else if (strcmp($category, "racket")===0){
     //echo $price." ".$description." ".$supplierId." ".$category." ".$brand." ".$itemCode." ".$sport." ".$balance." ".$weight;
 }
 
+//STORE FILE ON FS AND REFERENCE IN DB
+$filename = NULL;
+if (empty($_FILES['file'])){
+    //do nothing :)
+}
+else if ( $_FILES['file']['error'] ) {
+
+    http_response_code(404);
+    echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+    return;
+}
+else {
+
+    $target_dir =  $_SERVER['DOCUMENT_ROOT']."/ItemPictures/";
+
+    //check if file is an image
+    $check = getimagesize($_FILES["file"]["tmp_name"]);
+    if($check === false) {
+        http_response_code(404);
+        echo "File is not an image ";
+        die();
+    }
+
+    // Allow certain file formats
+    $extension = pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION);
+
+    if($extension != "jpg" && $extension != "png" && $extension != "jpeg" && $extension != "gif" ) {
+        http_response_code(404);
+        echo "Only JPG, JPEG, PNG & GIF files are allowed.";
+        die();
+    }
+
+    //create filename
+
+    while (true) {
+        $filename = uniqid(rand(), true) . ".".$extension;
+        if (!file_exists($target_dir . $filename)) break;
+    }
+
+   //save file after saved to db successfully
+
+}
 
 
 include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
@@ -66,10 +90,14 @@ include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
 $connection->autocommit(FALSE);
 
 //INSERTING TO DIFFERENTITEM TABLE
-$query ="INSERT INTO differentitem (Price, Description,SupplierId,Category,Brand,SuppliersItemCode, AvailableOnline, Image)
-        Values(?,?,?,?,?,?, false,$image)";
+$query ="INSERT INTO differentitem (Price, Description,SupplierId,Category,Brand,SuppliersItemCode, AvailableOnline, ImagePath)
+        Values(?,?,?,?,?,?, 0, ?)";
 $stmt = $connection->prepare($query);
-$stmt ->bind_param("isisss",$price,$description,$supplierId,$category,$brand,$itemCode);
+
+//echo $connection->error . " ==== " . $connection->error."===";
+
+
+$stmt ->bind_param("isissss",$price,$description,$supplierId,$category,$brand,$itemCode, $filename);
 if ($stmt===false){//wrong type (if user modified js)
     http_response_code(404);
     echo "wrong type";
@@ -116,7 +144,21 @@ if (strcmp($category,"general")!==0){
 
 }
 
+//file save before commit. If fileSave fails, queries are reverted
+if ($filename!==NULL){
+
+    if (!move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir.$filename)) {
+        http_response_code(500);
+        echo "Error while uploading file";
+        die();
+    }
+}
+
+
 $connection->commit();
+
+
+
 
 echo "Saved successfully";
 

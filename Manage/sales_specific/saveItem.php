@@ -79,7 +79,7 @@ else {
         if (!file_exists($target_dir . $filename)) break;
     }
 
-   //save file after saved to db successfully
+   //save file after saved to db successfully.
 
 }
 

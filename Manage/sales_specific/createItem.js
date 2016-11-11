@@ -26,7 +26,57 @@ $(function(){
 
 
 
+    $("#image").change(imageLoader);
+
+
+
+
+
 });
+
+function imageLoader() {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var img = new Image();
+        img.onload = function(){
+
+            var canvas = document.getElementById('previewImage');
+            var squareSide = 300;
+            canvas.width=squareSide;
+            canvas.height=squareSide;
+            var ctx = canvas.getContext('2d');
+
+            ctx.beginPath();
+            ctx.rect(0, 0, squareSide, squareSide);
+            ctx.fillStyle = "lightgrey";
+            ctx.fill();
+
+            var wtoh = img.width / img.height;
+            var newWidth = canvas.width;
+            var newHeight = newWidth / wtoh;
+            if (newHeight > canvas.height) {
+                newHeight = canvas.height;
+                newWidth = newHeight * wtoh;
+            }
+
+            ctx.drawImage(img,(canvas.width-newWidth)/2,(canvas.height-newHeight)/2, newWidth , newHeight);
+
+        };
+        img.src = reader.result;
+    };
+    reader.readAsDataURL(document.getElementById('image').files[0]);
+}
+
+
+function dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: dataURI.split(',')[0].split(':')[1].split(';')[0] });
+}
 
 function saveItem(){
 
@@ -94,12 +144,14 @@ function saveItem(){
         form_data.append(key,input);
     });
 
-    //and image
-    var blobFile = document.getElementById("image").files[0];
-    if (blobFile!==undefined){
-        form_data.append('file', blobFile);
+    // //and image
+    // var blobFile = document.getElementById("image").files[0];
+    // if (blobFile!==undefined){
+    //     form_data.append('file', blobFile);
+    //
+    // }
 
-    }
+    form_data.append('file', dataURItoBlob(document.getElementById('previewImage').toDataURL()));
 
 
 
@@ -138,5 +190,10 @@ function saveItem(){
 
 
 
+
+}
+
+
+function resizeImage(){
 
 }

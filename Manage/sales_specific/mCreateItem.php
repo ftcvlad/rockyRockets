@@ -174,7 +174,7 @@ include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
 
 
 
-
+    <canvas id="previewImage" ></canvas>
 
 
     </div>

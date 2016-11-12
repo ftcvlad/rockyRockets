@@ -26,45 +26,63 @@ $(function(){
 
 
 
-    $("#image").change(imageLoader);
-
-
-
-
+    $("#image").change(processImage);
 
 });
 
-function imageLoader() {
-    var reader = new FileReader();
-    reader.onload = function(event) {
-        var img = new Image();
-        img.onload = function(){
 
-            var canvas = document.getElementById('previewImage');
-            var squareSide = 300;
-            canvas.width=squareSide;
-            canvas.height=squareSide;
-            var ctx = canvas.getContext('2d');
+var validExtensions = [".jpg", ".jpeg",  ".gif", ".png"];
+function processImage() {
+    $("#canvasDiv").html("");
+    $(".panel-heading").find('span').remove();
 
-            ctx.beginPath();
-            ctx.rect(0, 0, squareSide, squareSide);
-            ctx.fillStyle = "lightgrey";
-            ctx.fill();
+    var file = document.getElementById('image').files[0];
 
-            var wtoh = img.width / img.height;
-            var newWidth = canvas.width;
-            var newHeight = newWidth / wtoh;
-            if (newHeight > canvas.height) {
-                newHeight = canvas.height;
-                newWidth = newHeight * wtoh;
-            }
 
-            ctx.drawImage(img,(canvas.width-newWidth)/2,(canvas.height-newHeight)/2, newWidth , newHeight);
+    if (file !==undefined) {
 
+        var fileName = file.name;
+        var ext = fileName.substr(fileName.lastIndexOf(".")).toLowerCase();
+        if (validExtensions.indexOf(ext)===-1){
+            var inputFileJQ = $("#image");
+            inputFileJQ.replaceWith( inputFileJQ = inputFileJQ.clone( true ) );
+            $(".panel-heading").append("<span > "+"Supported extensions are: .jpg, .jpeg, .gif, .png"+"</span>");
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var img = new Image();
+            img.onload = function () {
+
+                // var canvas = document.getElementById('previewImage');
+                var canvas = document.createElement("canvas");
+                canvas.setAttribute("id","previewImage");
+                var squareSide = 300;
+                canvas.width = squareSide;
+                canvas.height = squareSide;
+                var ctx = canvas.getContext('2d');
+
+                ctx.beginPath();
+                ctx.rect(0, 0, squareSide, squareSide);
+                ctx.fillStyle = "lightgrey";
+                ctx.fill();
+
+                var wtoh = img.width / img.height;
+                var newWidth = canvas.width;
+                var newHeight = newWidth / wtoh;
+                if (newHeight > canvas.height) {
+                    newHeight = canvas.height;
+                    newWidth = newHeight * wtoh;
+                }
+
+                ctx.drawImage(img, (canvas.width - newWidth) / 2, (canvas.height - newHeight) / 2, newWidth, newHeight);
+                $("#canvasDiv").append(canvas);
+            };
+            img.src = reader.result;
         };
-        img.src = reader.result;
-    };
-    reader.readAsDataURL(document.getElementById('image').files[0]);
+        reader.readAsDataURL(file);
+    }
 }
 
 
@@ -77,6 +95,20 @@ function dataURItoBlob(dataURI) {
     }
     return new Blob([ab], { type: dataURI.split(',')[0].split(':')[1].split(';')[0] });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function saveItem(){
 
@@ -144,14 +176,11 @@ function saveItem(){
         form_data.append(key,input);
     });
 
-    // //and image
-    // var blobFile = document.getElementById("image").files[0];
-    // if (blobFile!==undefined){
-    //     form_data.append('file', blobFile);
-    //
-    // }
 
-    form_data.append('file', dataURItoBlob(document.getElementById('previewImage').toDataURL()));
+    var selectedFiles = document.getElementById("image").files;
+    if ( selectedFiles.length===1){
+        form_data.append('file', dataURItoBlob(document.getElementById('previewImage').toDataURL()),selectedFiles[0].name);
+    }
 
 
 

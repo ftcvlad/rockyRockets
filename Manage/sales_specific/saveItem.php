@@ -7,8 +7,7 @@ if (strcmp($_SESSION['user']->department, "Sales")!==0){
     die();
 }
 
-var_dump($_POST);
-var_dump($_FILES);
+
 
 if (!empty($_POST["price"])){    $price =  $_POST["price"];}else{exit("bad input1");}
 if (!empty($_POST["description"])){$description =  $_POST["description"];}else{exit("bad input2");}
@@ -94,7 +93,7 @@ $query ="INSERT INTO differentitem (Price, Description,SupplierId,Category,Brand
         Values(?,?,?,?,?,?, 0, ?)";
 $stmt = $connection->prepare($query);
 
-//echo $connection->error . " ==== " . $connection->error."===";
+
 
 
 $stmt ->bind_param("isissss",$price,$description,$supplierId,$category,$brand,$itemCode, $filename);

@@ -114,3 +114,9 @@ textarea{
 #apparelFields  .radio-inline{
     margin-left:10px;
 }
+
+#canvasDiv{
+    margin: 20px auto auto;
+    width:300px;
+
+}

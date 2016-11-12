@@ -169,12 +169,12 @@ include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
 
 
 
+    <div id="canvasDiv"></div>
 
 
 
 
 
-    <canvas id="previewImage" ></canvas>
 
 
     </div>

@@ -120,3 +120,58 @@ textarea{
     width:300px;
 
 }
+
+
+/*order items*/
+
+.rowDiv{
+    border-top: 1px solid grey;
+    overflow: auto;
+}
+
+.dataDiv{
+    display:flex;
+    border-right: 1px solid grey;
+    padding: 15px;
+}
+
+.dataDiv img{
+    width:180px;
+    height:180px;
+    flex: 0 0 auto;
+}
+
+.dataDiv ul{
+    flex: 1 1 auto;
+    list-style-type: none;
+}
+
+.dataDiv ul p{
+    font-weight: bold;
+    font-family:monospace;
+    margin-right:10px;
+}
+
+.inlineParagraph{
+    display:inline;
+}
+
+.actionDiv{
+    display:flex;
+    flex-direction: column;
+}
+
+.actionDiv input{
+    width:40px;
+
+}
+.actionDiv .input-group{
+    margin-top:15px;
+}
+
+.actionDiv div:first-child{
+    line-height: 35px;
+    height:35px;
+    text-align: center;
+    border-bottom:1px solid grey;
+}

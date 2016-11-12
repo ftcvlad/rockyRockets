@@ -20,43 +20,105 @@ $(function(){
 
     });
 
+    $("#category").change(function(){
+        var val = $(this).val();
+        if (val==="general"){
+            $("#sportInputDiv").hide();
+            $("#apparelInputDiv").hide();
+
+        }
+        else if (val==="racket"){
+            $("#sportInputDiv").show();
+            $("#apparelInputDiv").hide();
+        }
+        else if (val==="apparel"){
+            $("#sportInputDiv").hide();
+            $("#apparelInputDiv").show();
+        }
+    });
+
 
 });
 
 function searchItemsToOrder(){
+    $("#resultHolder").html('');
 
-    $(".panel-heading").find('span').remove();
+    var data ={description:$("#description").val(), category:$("#category").val(), brand:$("#brand").val()};
 
-    var description = $("#description").val();
-    var category = $("#category").val();
-    var fromPrice = $("#fromPrice").val();
-    var toPrice = $("#toPrice").val();
-    var brand = $("#brand").val();
-
-
-
-    if (toPrice<fromPrice){
-        $(".panel-heading").append("<span > "+"Price interval incorrect"+"</span>");
-        return;
+    if (data.category==="apparel"){
+        data.color = $("#color").val();
     }
-    else if (toPrice<0 || fromPrice<0){
-        $(".panel-heading").append("<span > "+"Price cannot be negative"+"</span>");
-        return;
+    else if (data.category==="racket"){
+        data.sport = $("#sport").val();
     }
-    else if ((toPrice==="" && fromPrice!=="") || (toPrice!=="" && fromPrice==="")){
-        $(".panel-heading").append("<span > "+"Set both price values or none"+"</span>");
-        return;
-    }
+
 
 
     $.ajax({
         type: 'POST',
         url: "searchItemToOrder.php",
-        data: {description: description, category:category, fromPrice:fromPrice, toPrice:toPrice, brand:brand},
+        data: data,
         dataType: "text",
         success: function(resultItems) {
 
+            resultItems = JSON.parse(resultItems);
+            console.log(resultItems);
+            for (var i=0;i<resultItems.length;i++){
 
+
+
+                var imageSrc = resultItems[i].ImagePath==null?"noImage.png":resultItems[i].ImagePath;
+                var brand = resultItems[i].Brand==null?"":resultItems[i].Brand;
+                var price = resultItems[i].Price;
+                var description = resultItems[i].Description;
+
+                $("#resultHolder").append('' +
+                        '<div class="rowDiv">'+
+                            '<div class="dataDiv col-xs-10" >'+
+                                '<img src="/ItemPictures/'+imageSrc+'">'+
+                                '<ul>'+
+                                    '<li><p class="inlineParagraph">Brand:</p>'+brand+'</li>'+
+                                    '<li><p >Description:</p>'+description+'</li>'+
+                                    '<li><p class="inlineParagraph">Price:</p>'+price+'</li>'+
+                                '</ul>'+
+                            '</div>'+
+                            '<div class="actionDiv col-xs-2" ">'+
+                                '<div> Order</div>'+
+                                '<div class="input-group">'+
+                                    '<input type="text" class="form-control" max="2">'+
+                                    '<span class="input-group-btn">'+
+                                        '<button class="btn btn-primary " type="button">+</button>'+
+                                    '</span>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
 
         },
         error:function(jqXHR, status, errorText){

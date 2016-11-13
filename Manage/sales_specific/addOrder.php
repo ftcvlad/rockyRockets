@@ -15,12 +15,40 @@ if (isset($_POST["id"])){    $id =  $_POST["id"];}else{exit("something went wron
 if (isset($_POST["number"])){$number =  $_POST["number"];}else{exit("something went wrong");}
 
 
+$locationId = $_SESSION['user']->locationId;
+$staffId = $_SESSION['user']->staffId;
+
+$connection->autocommit(FALSE);
 
 
-
-$query ="INSERT IGNORE INTO staff (FirstName, LastName,UserName,Password,DepartmentId, Position, Salary)
-        Values(?,?,?,?,?,?,?)";
-
+//update ordereditem
+$query ="INSERT INTO ordereditem (Quantity, ItemId,StaffId) Values(?,?,?)";
 $stmt = $connection->prepare($query);
+$stmt->bind_param("iii",$number, $id, $staffId);
+$stmt->execute();
 
-$stmt->bind_param("sss",$escapedPrepCriterion , $escapedPrepCriterion,$position);
+
+//update number of items at location
+$query2 = "INSERT INTO location_has_differentitem (Location_id, ItemKind_Id, Quantity) VALUES(?,?,?) 
+          ON DUPLICATE KEY UPDATE Location_id=Location_id, ItemKind_Id=ItemKind_Id, Quantity=Quantity+VALUES(Quantity)";
+
+$stmt = $connection->prepare($query2);
+$stmt->bind_param("iii",$locationId, $id, $number);
+$stmt->execute();
+
+
+
+//update available online
+$query3 = "UPDATE differentitem 
+            SET AvailableOnline = IF((SELECT LocationType FROM location WHERE location.Id=?)='Warehouse', 1, AvailableOnline)
+            WHERE differentitem.Id=?";
+
+$stmt = $connection->prepare($query3);
+$stmt->bind_param("ii",$locationId, $id);
+$stmt->execute();
+
+
+
+$connection->commit();
+
+echo $number;

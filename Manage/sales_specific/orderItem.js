@@ -129,7 +129,7 @@ function searchItemsToOrder(){
                                         '<button class="btn btn-primary " type="button" onclick="orderItem(this);">+</button>'+
                                     '</span>'+
                                 '</div>'+
-                                '<div id="currentQuantity">Quantity at your location: <span style="font-weight:bold">'+quantity+'</span>'+
+                                '<div id="currentQuantity">Quantity at your location: <span style="font-weight:bold" class="quantitySpan">'+quantity+'</span>'+
                             '</div>'+
                         '</div>');
 
@@ -167,7 +167,9 @@ function orderItem(elem){
     $(".panel-heading").find("span").remove();
 
    var itemToOrderId = $(elem).closest(".rowDiv").data("id");
-   var orderSize =  $(elem).parent().prev().val();
+   var targetInput = $(elem).parent().prev();
+
+   var orderSize = targetInput.val();
 
    if (orderSize<0){
        alert("Order size should be >0!");
@@ -178,7 +180,11 @@ function orderItem(elem){
         url: "./addOrder.php",
         data: {number:orderSize, id:itemToOrderId},
         dataType: "text",
-        success: function(resultItems) {
+        success: function(addedQuantity) {
+
+            targetInput.val('');
+            var currentAmountElem = $(elem).closest(".rowDiv").find(".quantitySpan");
+            currentAmountElem.text(parseInt(currentAmountElem.text())+parseInt(addedQuantity));
 
             $(".panel-heading").append("<span> "+"Done"+"</span>");
 

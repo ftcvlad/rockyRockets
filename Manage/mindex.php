@@ -1,5 +1,5 @@
 <?php
-    include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
+    include  "mIncludes/ensureAuthenticated.php";
 ?>
 
 
@@ -10,15 +10,16 @@
     <title>Manager area</title>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="logout.js"></script>
-    <script src="searchStaff.js"></script>
+    <script src="./searchStaff.js"></script>
+    <link rel="stylesheet" href="./manageStyles.css">
 
 
 </head>
 <body>
 
 <?php
-    include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
+    include  "mIncludes/header.php";
+
 ?>
 
 

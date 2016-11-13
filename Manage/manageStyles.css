@@ -1,5 +1,15 @@
 /*search staff*/
 
+/*remove spinner*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 .panel{
     margin:auto;
     width:90%;
@@ -69,8 +79,8 @@ tr:hover .cornerButton{
 
 
 
-.navbar-default .navbar-nav li a:hover,.navbar a:hover{
-    background-color: #dedede;
+.hoverable:hover{
+    background-color: #dedede !important;
 }
 
 /*add staff*/
@@ -150,10 +160,23 @@ textarea{
     font-weight: bold;
     font-family:monospace;
     margin-right:10px;
+    color:#4aacff;
 }
 
 .inlineParagraph{
     display:inline;
+}
+
+.inlineParagraph.extraInfo{
+    margin-right:0;
+    margin-left: 10px;
+}
+
+
+
+li.extraInfo{
+    font-size:small;
+    font-family:monospace;
 }
 
 .actionDiv{
@@ -183,3 +206,5 @@ textarea{
 #currentQuantity span{
     font-weight:bold;
 }
+
+

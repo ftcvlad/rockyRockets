@@ -1,5 +1,5 @@
 <?php
-include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
+include  "../mIncludes/ensureAuthenticated.php";
 
 if (strcmp($_SESSION['user']->department, "Sales")!==0){
 
@@ -22,16 +22,16 @@ if (strcmp($_SESSION['user']->department, "Sales")!==0){
     <title>Manager area</title>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="../logout.js"></script>
 
-    <script src="orderItem.js"></script>
 
+    <script src="./orderItem.js"></script>
+    <link rel="stylesheet" href="../manageStyles.css">
 
 </head>
 <body>
 
 <?php
-include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
+include  "../mIncludes/header.php";
 ?>
 
 
@@ -65,7 +65,7 @@ include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
                 <div class="form-group row">
                     <label class="col-xs-2 col-form-label "></label>
                     <label for="brand" class="col-xs-2 col-form-label ">Brand</label>
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <input class="form-control input-sm" type="text" id="brand" placeholder="">
                     </div>
                 </div>
@@ -73,15 +73,26 @@ include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
                     <label class="col-xs-2 col-form-label "></label>
                     <div id="sportInputDiv">
                         <label for="sport" class="col-xs-2 col-form-label ">Sport</label>
-                        <div class="col-xs-2">
-                            <input class="form-control input-sm" type="text" id="sport">
+<!--                        <div class="col-xs-2">-->
+<!--                            <input class="form-control input-sm" type="text" id="sport">-->
+<!--                        </div>-->
+
+                        <div class="col-xs-3">
+                            <select class="form-control input-sm" id="sport">
+                                <option value="" selected> -- select --</option>
+                                <option value="badminton"> Badminton</option>
+                                <option value="tennis" > Tennis</option>
+                                <option value="squash"> Squash</option>
+                            </select>
                         </div>
+
+
                     </div>
 
                     <div style="display:none" id="apparelInputDiv">
                         <label for="color" class="col-xs-2 col-form-label ">Color</label>
-                        <div class="col-xs-2">
-                            <input class="form-control input-sm" type="number" id="color">
+                        <div class="col-xs-3">
+                            <input class="form-control input-sm" type="text" id="color">
                         </div>
                     </div>
 
@@ -110,6 +121,11 @@ include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
 <!--                        <li><p class="inlineParagraph">Brand:</p> Nike</li>-->
 <!--                        <li><p >Description:</p>sdsfdfg sdfdgdfgfgf my name is vladisdfsdfdfffffffffffffffffffff ddddddddddddddddddd dddddddd ddddddddd dddddddddddddddddddd ddddddd</li>-->
 <!--                        <li><p class="inlineParagraph">Price:</p>123</li>-->
+<!--                        <li>-->
+<!--                            <p class="inlineParagraph extraInfo">Sport:</p>badminton-->
+<!--                            <p class="inlineParagraph extraInfo">Weight:</p>10grams-->
+<!--                            <p class="inlineParagraph extraInfo">Balance:</p>average-->
+<!--                        </li>-->
 <!--                    </ul>-->
 <!--                </div>-->
 <!--                <div class="actionDiv col-xs-2" ">-->

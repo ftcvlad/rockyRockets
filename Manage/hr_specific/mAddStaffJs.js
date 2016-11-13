@@ -107,7 +107,7 @@ function addStaff(){
 
     $.ajax({
         type: 'POST',
-        url: "saveStaff.php",
+        url: "./saveStaff.php",
         data: {username:username, password:password,name:name,surname:surname,salary:salary,position:position,depId:depId},
         dataType: "text",
         success: function(resultData) {
@@ -135,4 +135,10 @@ function addStaff(){
     });
 
 
+}
+
+function logoutF(){
+    $.post("../logout.php",function(){
+        window.location  = "../../loginPage.php";
+    });
 }

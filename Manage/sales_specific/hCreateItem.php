@@ -1,5 +1,5 @@
 <?php
-include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
+include  "../mIncludes/ensureAuthenticated.php";
 
 if (strcmp($_SESSION['user']->department, "Sales")!==0){
 
@@ -8,7 +8,7 @@ if (strcmp($_SESSION['user']->department, "Sales")!==0){
 }
 
 
-include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
+include  "../../includes/db.php";
 
 
 $query = "SELECT Organization, PostCode, Id
@@ -33,16 +33,17 @@ $res = $stmt->get_result();
     <title>Manager area</title>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="../logout.js"></script>
 
-    <script src="createItem.js"></script>
+
+    <script src="./createItem.js"></script>
+    <link rel="stylesheet" href="../manageStyles.css">
 
 
 </head>
 <body>
 
 <?php
-include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
+include  "../mIncludes/header.php";
 ?>
 
 

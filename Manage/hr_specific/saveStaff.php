@@ -1,5 +1,5 @@
 <?php
-include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
+include  "../mIncludes/ensureAuthenticated.php";
 
 if (strcmp($_SESSION['user']->department, "Hr")!==0){
     http_response_code(401);
@@ -24,7 +24,7 @@ if (strcmp($position,"seller")!==0 && strcmp($position, "manager")!==0){
     return;
 }
 
-include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
+include  "../../includes/db.php";
 
 $query ="INSERT IGNORE INTO staff (FirstName, LastName,UserName,Password,DepartmentId, Position, Salary)
         Values(?,?,?,?,?,?,?)";

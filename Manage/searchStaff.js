@@ -10,7 +10,7 @@ $(function(){
 
         $.ajax({
             type: 'POST',
-            url: "/Manage/hr_specific/updateSalary.php",
+            url: "./hr_specific/updateSalary.php",
             data: {newSalary:$("#salary").val(),staffId:$(targetRow).data("id") },
             dataType: "text",
             success: function(resultData) {
@@ -53,7 +53,7 @@ function searchStaff(){
 
     $.ajax({
         type: 'POST',
-        url: "/Manage/search.php",
+        url: "./search.php",
         data: {criterion:$("#criteria").val(),position:$("#posSel").val() },
         dataType: "text",
         success: function(resultData) {
@@ -123,6 +123,12 @@ function addId(target){
 
 }
 
+
+function logoutF(){
+    $.post("./logout.php",function(){
+        window.location  = "../loginPage.php";
+    });
+}
 
 
 

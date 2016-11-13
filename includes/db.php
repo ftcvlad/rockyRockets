@@ -2,6 +2,7 @@
 
 
 //$connection = mysqli_connect('silva.computing.dundee.ac.uk', '16ac3u13', 'cab231', '16ac3d13');
+//and change envProd in header!
 $connection = mysqli_connect('127.0.0.1', 'root', 'malolg', 'rocky_rockets');
 
 if ($connection->connect_errno) {

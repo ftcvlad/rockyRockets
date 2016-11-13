@@ -20,7 +20,7 @@
 
         $userType = $_SESSION['user']->position;
         if (strcmp($userType, "manager")===0){
-            header('Location: /Manage/mindex.php', true, 302);
+            header('Location: Manage/mindex.php', true, 302);
             exit();
 
         }

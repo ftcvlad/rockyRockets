@@ -1,5 +1,5 @@
 <?php
-include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
+include  "../mIncludes/ensureAuthenticated.php";
 
 if (strcmp($_SESSION['user']->department, "Sales")!==0){
     http_response_code(401);
@@ -52,7 +52,7 @@ else if ( $_FILES['file']['error'] ) {
 }
 else {
 
-    $target_dir =  $_SERVER['DOCUMENT_ROOT']."/ItemPictures/";
+    $target_dir = "../../ItemPictures/";
 
     //check if file is an image
     $check = getimagesize($_FILES["file"]["tmp_name"]);
@@ -83,7 +83,7 @@ else {
 }
 
 
-include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
+include  "../../includes/db.php";
 
 //do as a single transaction -- rollback if die() before commit
 $connection->autocommit(FALSE);

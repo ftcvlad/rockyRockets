@@ -187,7 +187,7 @@ function saveItem(){
 
     $.ajax({
         type: 'POST',
-        url: "saveItem.php",
+        url: "./saveItem.php",
         data: form_data,
         dataType: "text",
         contentType: false,
@@ -223,6 +223,8 @@ function saveItem(){
 }
 
 
-function resizeImage(){
-
+function logoutF(){
+    $.post("../logout.php",function(){
+        window.location  = "../../loginPage.php";
+    });
 }

@@ -42,6 +42,7 @@ $(function(){
 
 function searchItemsToOrder(){
     $("#resultHolder").html('');
+    $(".panel-heading").find('span').remove();
 
     var data ={description:$("#description").val(), category:$("#category").val(), brand:$("#brand").val()};
 
@@ -53,14 +54,14 @@ function searchItemsToOrder(){
     }
 
 
-
     $.ajax({
         type: 'POST',
-        url: "searchItemToOrder.php",
+        url: "./searchItemToOrder.php",
         data: data,
         dataType: "text",
         success: function(resultItems) {
 
+            console.log(resultItems);
             resultItems = JSON.parse(resultItems);
 
             for (var i=0;i<resultItems.length;i++){
@@ -73,69 +74,128 @@ function searchItemsToOrder(){
                 var description = resultItems[i].Description;
                 var quantity = resultItems[i].Quantity==null?0:resultItems[i].Quantity;
 
+                var extraLi = "";
+                if (resultItems[i].Sport!==undefined){//racket
+
+                    var sport = resultItems[i].Sport==null?"":resultItems[i].Sport;
+                    var weight = resultItems[i].Weight==null?"":resultItems[i].Weight;
+                    var balance = resultItems[i].Balance==null?"":resultItems[i].Balance;
+                    extraLi ='<li>'+
+                            '<p class="inlineParagraph extraInfo">Sport:</p>'+sport+
+                            '<p class="inlineParagraph extraInfo">Weight:</p>'+weight+
+                            '<p class="inlineParagraph extraInfo">Balance:</p>'+balance+
+                            '</li>';
+                    console.log("racket");
+                }
+                else  if (resultItems[i].Color!==undefined){//apparel
+                    var color = resultItems[i].Color==null?"":resultItems[i].Color;
+                    var size = resultItems[i].Size==null?"":resultItems[i].Size;
+                    var gender="";
+
+                    if (resultItems[i].ForMen!=null){
+                        gender = resultItems[i].ForMen==1?"M":"F";
+                    }
+
+
+                    extraLi ='<li>'+
+                        '<p class="inlineParagraph extraInfo">Color:</p>'+color+
+                        '<p class="inlineParagraph extraInfo">Size:</p>'+size+
+                        '<p class="inlineParagraph extraInfo">Gender:</p>'+gender+
+                        '</li>';
+                    console.log("apparel");
+                }
+                else{
+                    console.log("general");
+                }
+
+
+
                 $("#resultHolder").append('' +
-                        '<div class="rowDiv">'+
+                        '<div class="rowDiv" data-id="'+resultItems[i].itemId+'">'+
                             '<div class="dataDiv col-xs-10" >'+
                                 '<img src="/ItemPictures/'+imageSrc+'">'+
                                 '<ul>'+
                                     '<li><p class="inlineParagraph">Brand:</p>'+brand+'</li>'+
                                     '<li><p >Description:</p>'+description+'</li>'+
                                     '<li><p class="inlineParagraph">Price:</p>'+price+'</li>'+
+                                    extraLi+
                                 '</ul>'+
                             '</div>'+
                             '<div class="actionDiv col-xs-2" ">'+
                                 '<div> Order</div>'+
                                 '<div class="input-group">'+
-                                    '<input type="text" class="form-control" max="2">'+
+                                    '<input  class="form-control noSpinnerInput" type="number">'+
                                     '<span class="input-group-btn">'+
-                                        '<button class="btn btn-primary " type="button">+</button>'+
+                                        '<button class="btn btn-primary " type="button" onclick="orderItem(this);">+</button>'+
                                     '</span>'+
                                 '</div>'+
                                 '<div id="currentQuantity">Quantity at your location: <span style="font-weight:bold">'+quantity+'</span>'+
                             '</div>'+
                         '</div>');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
+
+            $(".panel-heading").append("<span > Done</span>");
 
         },
         error:function(jqXHR, status, errorText){
 
             if (jqXHR.status===500){
 
-                $(".panel-heading").append("<span > database error</span>");
+                $(".panel-heading").append("<span> database error</span>");
             }
             else if (jqXHR.status === 401){
 
-                $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
+                $(".panel-heading").append("<span> "+jqXHR.responseText+"</span>");
             }
             else if (jqXHR.status === 404){
 
-                $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
+                $(".panel-heading").append("<span> "+jqXHR.responseText+"</span>");
+            }
+
+        }
+
+    });
+
+
+
+}
+
+
+function orderItem(elem){
+
+    $(".panel-heading").find("span").remove();
+
+   var itemToOrderId = $(elem).closest(".rowDiv").data("id");
+   var orderSize =  $(elem).parent().prev().val();
+
+   if (orderSize<0){
+       alert("Order size should be >0!");
+       return;
+   }
+    $.ajax({
+        type: 'POST',
+        url: "./addOrder.php",
+        data: {number:orderSize, id:itemToOrderId},
+        dataType: "text",
+        success: function(resultItems) {
+
+            $(".panel-heading").append("<span> "+"Done"+"</span>");
+
+        },
+        error:function(jqXHR, status, errorText){
+
+            if (jqXHR.status===500){
+
+                $(".panel-heading").append("<span> database error</span>");
+            }
+            else if (jqXHR.status === 401){
+
+                $(".panel-heading").append("<span> "+jqXHR.responseText+"</span>");
+            }
+            else if (jqXHR.status === 404){
+
+                $(".panel-heading").append("<span> "+jqXHR.responseText+"</span>");
             }
 
         }
@@ -145,6 +205,17 @@ function searchItemsToOrder(){
 
 
 
+}
 
 
+
+
+
+
+
+
+function logoutF(){
+    $.post("../logout.php",function(){
+        window.location  = "../../loginPage.php";
+    });
 }

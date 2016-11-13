@@ -1,5 +1,5 @@
 <?php
-include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/ensureAuthenticated.php";
+include  "../mIncludes/ensureAuthenticated.php";
 
 if (strcmp($_SESSION['user']->department, "Sales")!==0){
     http_response_code(401);
@@ -15,7 +15,7 @@ if (strcmp($category,"general")!==0 && strcmp($category, "racket")!==0 && strcmp
     return;
 }
 
-include  $_SERVER['DOCUMENT_ROOT']."/includes/db.php";
+include "../../includes/db.php";
 
 $description =  $_POST["description"];
 $brand = $_POST["brand"];
@@ -138,11 +138,11 @@ else {//APPAREL OR RACKET
     $whereStr="";
 
     $count = 0;
-    $criteria = array();
+    $criteriaValues = array();
     if (!empty($brand)){
         $whereStr.=" Brand=?";
         $count++;
-        $criteria[] = $brand;
+        $criteriaValues[] = $brand;
     }
 
     if (!empty($description)){
@@ -152,7 +152,17 @@ else {//APPAREL OR RACKET
         }
         $whereStr.= " Description LIKE ? ESCAPE '!'";
         $count++;
-        $criteria[] = $description;
+
+        str_replace("!","!!",$description);
+        str_replace("%","!%",$description);
+        str_replace("_","!_",$description);
+        str_replace("[","![",$description);
+
+        $escapedDescription = "%".$description."%";
+
+
+        $criteriaValues[] = $escapedDescription;
+//        echo "--".$description."--";
     }
 
     if (!empty($extraSearchCriterionValue)){
@@ -162,7 +172,7 @@ else {//APPAREL OR RACKET
         }
         $whereStr.= ($extraSearchCriterion."=?");
         $count++;
-        $criteria[] = $extraSearchCriterionValue;
+        $criteriaValues[] = $extraSearchCriterionValue;
     }
 
 
@@ -170,16 +180,21 @@ else {//APPAREL OR RACKET
         $whereStr= "WHERE ".$whereStr;
     }
 
-    $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity, ".$col1.", ".$col2.", ".$col3."
+    $query = " SELECT itemId,Price,Brand,Description,ImagePath, Quantity, ".$col1.", ".$col2.", ".$col3."
                        FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) AS a
                        Right JOIN
-                            (SELECT Id,Price,Brand,Description,ImagePath, ".$col1.", ".$col2.", ".$col3."
-                                FROM differentitem 
+                            (SELECT DifferentItem.Id as itemId,Price,Brand,Description,ImagePath, ".$col1.", ".$col2.", ".$col3."
+                                FROM DifferentItem 
                                 INNER JOIN ".$attributeTableName." 
                                 ON DifferentItem.Id=".$attributeTableName.".Id
                                 ".$whereStr." ) as b
-                       ON a.ItemKind_id = b.Id";
+                       ON a.ItemKind_id = b.itemId";
 
+
+
+
+
+   // echo $query;
 
     $stmt = $connection->prepare($query);
 
@@ -188,13 +203,13 @@ else {//APPAREL OR RACKET
         $stmt->bind_param("i",$currentUserLocationId);
     }
     else if ($count===1){
-        $stmt->bind_param("is",$currentUserLocationId, $criteria[0]);
+        $stmt->bind_param("is",$currentUserLocationId, $criteriaValues[0]);
     }
     else if ($count===2){
-        $stmt->bind_param("is",$currentUserLocationId, $criteria[0], $criteria[1]);
+        $stmt->bind_param("iss",$currentUserLocationId, $criteriaValues[0], $criteriaValues[1]);
     }
     else if ($count===3){
-        $stmt->bind_param("isss",$currentUserLocationId, $criteria[0], $criteria[1],$criteria[2]);
+        $stmt->bind_param("isss",$currentUserLocationId, $criteriaValues[0], $criteriaValues[1],$criteriaValues[2]);
     }
 
 
@@ -206,7 +221,7 @@ else {//APPAREL OR RACKET
     while($r = $res->fetch_assoc()) {
         $rows[] = $r;
     }
-     print json_encode($rows);
+    print json_encode($rows);
 
 
     //not ready :(

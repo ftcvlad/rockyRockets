@@ -3,7 +3,8 @@
 
 include "includes/db.php";
 
-if (isset($_POST["username"])){    $username =  $_POST["username"];}else{exit("something went wrong");}
+
+ if (isset($_POST["username"])){    $username =  $_POST["username"];}else{exit("something went wrong");}
 if (isset($_POST['password'])){    $password =  $_POST['password'];}else{exit("something went wrong");}
 if (isset($_POST['type'])){    $loginType = $_POST['type'];}else{exit("something went wrong");}
 
@@ -83,7 +84,7 @@ else{
 
 
 
-mysqli_close($connection);
+mysqli_close($connection); 
 
 
 ?>

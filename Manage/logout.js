@@ -3,7 +3,7 @@
  */
 function logoutF(){
 
-    $.post("logout.php",function(){
+    $.post("/Manage/logout.php",function(){
         window.location  = "/loginPage.php";
     });
 

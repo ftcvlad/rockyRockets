@@ -23,7 +23,7 @@ $brand = $_POST["brand"];
 //$to = $_POST["color"];
 
 
-
+$currentUserLocationId = $_SESSION['user']->locationId;
 
 if (strcmp($category,"general")===0){//GENERAL
 
@@ -35,14 +35,34 @@ if (strcmp($category,"general")===0){//GENERAL
     if (!$hasDescription){
 
         if (!$hasBrand){
-            $query = "SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' ";
+            //where executed first ! so, 1) gets all with 'general' 2) gets all with location 3) right joins
+//            $query = "SELECT Id,Price,Brand,Description,ImagePath, Quantity FROM DifferentItem
+//                    LEFT JOIN Location_has_DifferentItem  ON Location_has_DifferentItem.ItemKind_Id = DifferentItem.Id
+//                    WHERE Category='general' AND Location_Id=?";
+
+            $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity
+                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) as a
+                       Right JOIN
+                            (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' ) as b
+                       ON a.ItemKind_id = b.Id";
+
+
             $stmt = $connection->prepare($query);
+            $stmt->bind_param("i",$currentUserLocationId);
+
         }
         else{
-            $query = "SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Brand='?' ";
+
+            $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity
+                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) as a
+                       Right JOIN
+                            (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Brand=?) as b
+                       ON a.ItemKind_id = b.Id";
+
+
             $stmt = $connection->prepare($query);
 
-            $stmt->bind_param("s",$brand);
+            $stmt->bind_param("is",$currentUserLocationId,$brand);
         }
 
     }
@@ -55,28 +75,26 @@ if (strcmp($category,"general")===0){//GENERAL
 
         $escapedDescription = "%".$description."%";
 
-
         if (!$hasBrand){
-            $query = "SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Description LIKE ? ESCAPE '!'";
+            $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity
+                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) as a
+                       Right JOIN
+                            (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Description LIKE ? ESCAPE '!') as b
+                       ON a.ItemKind_id = b.Id";
             $stmt = $connection->prepare($query);
-
-            $stmt->bind_param("s",$escapedDescription);
+            $stmt->bind_param("ss",$currentUserLocationId,$escapedDescription );
         }
         else{
-            $query = "SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general'".
-                                              " AND Brand=? AND Description LIKE ? ESCAPE '!' ";
+            $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity
+                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) as a
+                       Right JOIN
+                            (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Brand=? AND Description LIKE ? ESCAPE '!') as b
+                       ON a.ItemKind_id = b.Id";
+
             $stmt = $connection->prepare($query);
-
-            $stmt->bind_param("ss",$brand, $escapedDescription);
-
-
-
+            $stmt->bind_param("sss",$currentUserLocationId, $brand, $escapedDescription);
         }
-
-
     }
-
-
     $stmt->execute();
     $res = $stmt->get_result();
 
@@ -88,10 +106,110 @@ if (strcmp($category,"general")===0){//GENERAL
     print json_encode($rows);
 
 
-
-
 }
 else {//APPAREL OR RACKET
+
+    $attributeTableName="";
+    $extraSearchCriterionValue="";
+    $extraSearchCriterion="";
+    $col1 = "";
+    $col2 = "";
+    $col3 = "";
+    if (strcmp($category,"apparel")===0){
+        $attributeTableName = "apparelattribute";
+        $extraSearchCriterionValue = $_POST["color"];
+        $extraSearchCriterion ="Color";
+        $col1 ="Size";
+        $col2 = "Color";
+        $col3 = "ForMen";
+
+    }
+    else {
+        $attributeTableName = "racketattribute";
+        $extraSearchCriterionValue = $_POST["sport"];
+        $extraSearchCriterion="Sport";
+        $col1 ="Sport";
+        $col2 = "Balance";
+        $col3 = "Weight";
+
+    }
+
+
+    $whereStr="";
+
+    $count = 0;
+    $criteria = array();
+    if (!empty($brand)){
+        $whereStr.=" Brand=?";
+        $count++;
+        $criteria[] = $brand;
+    }
+
+    if (!empty($description)){
+
+        if ($count>0){
+            $whereStr.= " AND ";
+        }
+        $whereStr.= " Description LIKE ? ESCAPE '!'";
+        $count++;
+        $criteria[] = $description;
+    }
+
+    if (!empty($extraSearchCriterionValue)){
+
+        if ($count>0){
+            $whereStr.= " AND ";
+        }
+        $whereStr.= ($extraSearchCriterion."=?");
+        $count++;
+        $criteria[] = $extraSearchCriterionValue;
+    }
+
+
+    if ($count>0){
+        $whereStr= "WHERE ".$whereStr;
+    }
+
+    $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity, ".$col1.", ".$col2.", ".$col3."
+                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) AS a
+                       Right JOIN
+                            (SELECT Id,Price,Brand,Description,ImagePath, ".$col1.", ".$col2.", ".$col3."
+                                FROM differentitem 
+                                INNER JOIN ".$attributeTableName." 
+                                ON DifferentItem.Id=".$attributeTableName.".Id
+                                ".$whereStr." ) as b
+                       ON a.ItemKind_id = b.Id";
+
+
+    $stmt = $connection->prepare($query);
+
+
+    if ($count===0){
+        $stmt->bind_param("i",$currentUserLocationId);
+    }
+    else if ($count===1){
+        $stmt->bind_param("is",$currentUserLocationId, $criteria[0]);
+    }
+    else if ($count===2){
+        $stmt->bind_param("is",$currentUserLocationId, $criteria[0], $criteria[1]);
+    }
+    else if ($count===3){
+        $stmt->bind_param("isss",$currentUserLocationId, $criteria[0], $criteria[1],$criteria[2]);
+    }
+
+
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+
+    $rows = array();
+    while($r = $res->fetch_assoc()) {
+        $rows[] = $r;
+    }
+     print json_encode($rows);
+
+
+    //not ready :(
 
 }
 

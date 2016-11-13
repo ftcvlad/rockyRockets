@@ -62,7 +62,7 @@ function searchItemsToOrder(){
         success: function(resultItems) {
 
             resultItems = JSON.parse(resultItems);
-            console.log(resultItems);
+
             for (var i=0;i<resultItems.length;i++){
 
 
@@ -71,6 +71,7 @@ function searchItemsToOrder(){
                 var brand = resultItems[i].Brand==null?"":resultItems[i].Brand;
                 var price = resultItems[i].Price;
                 var description = resultItems[i].Description;
+                var quantity = resultItems[i].Quantity==null?0:resultItems[i].Quantity;
 
                 $("#resultHolder").append('' +
                         '<div class="rowDiv">'+
@@ -90,6 +91,7 @@ function searchItemsToOrder(){
                                         '<button class="btn btn-primary " type="button">+</button>'+
                                     '</span>'+
                                 '</div>'+
+                                '<div id="currentQuantity">Quantity at your location: <span style="font-weight:bold">'+quantity+'</span>'+
                             '</div>'+
                         '</div>');
 

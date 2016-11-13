@@ -14,7 +14,7 @@ if ( strcmp($loginType,"customer")===0){
 }
 else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){
 
-    $query = " SELECT UserName, Password, Position , DepartmentType
+    $query = " SELECT UserName, Password, Position , DepartmentType, LocationId
                FROM staff 
                LEFT JOIN staff_department
                ON staff_department.Id=staff.DepartmentId
@@ -60,7 +60,7 @@ else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){
                 else if (strcmp($loginType, "seller")===0){
                     $redirPage = "seller.html";
                 }
-                $userObject = (object) array('username' => $username, 'position' => $loginType, 'department'=>$row['DepartmentType']);
+                $userObject = (object) array('username' => $username, 'position' => $loginType, 'department'=>$row['DepartmentType'], 'locationId'=>$row['LocationId']);
                 session_start();
                 $_SESSION['user'] = $userObject;
                 echo $redirPage;

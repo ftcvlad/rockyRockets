@@ -175,3 +175,11 @@ textarea{
     text-align: center;
     border-bottom:1px solid grey;
 }
+
+#currentQuantity{
+    margin-top:15px;
+}
+
+#currentQuantity span{
+    font-weight:bold;
+}

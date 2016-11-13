@@ -103,26 +103,29 @@ include  $_SERVER['DOCUMENT_ROOT']."/Manage/mIncludes/header.php";
 
 
 
-            <!--<div class="rowDiv ">
-                <div class="dataDiv col-xs-10" >
-                    <img src="/ItemPictures/noImage.png">
-                    <ul>
-                        <li><p class="inlineParagraph">Brand:</p> Nike</li>
-                        <li><p >Description:</p>sdsfdfg sdfdgdfgfgf my name is vladisdfsdfdfffffffffffffffffffff ddddddddddddddddddd dddddddd ddddddddd dddddddddddddddddddd ddddddd</li>
-                        <li><p class="inlineParagraph">Price:</p>123</li>
-                    </ul>
-                </div>
-                <div class="actionDiv col-xs-2" ">
-                    <div> Order</div>
-                    <div class="input-group">
-
-                        <input type="text" class="form-control" max="2">
-                        <span class="input-group-btn">
-                        <button class="btn btn-primary " type="button">+</button>
-                      </span>
-                    </div>
-                </div>
-            </div>-->
+<!--            <div class="rowDiv ">-->
+<!--                <div class="dataDiv col-xs-10" >-->
+<!--                    <img src="/ItemPictures/noImage.png">-->
+<!--                    <ul>-->
+<!--                        <li><p class="inlineParagraph">Brand:</p> Nike</li>-->
+<!--                        <li><p >Description:</p>sdsfdfg sdfdgdfgfgf my name is vladisdfsdfdfffffffffffffffffffff ddddddddddddddddddd dddddddd ddddddddd dddddddddddddddddddd ddddddd</li>-->
+<!--                        <li><p class="inlineParagraph">Price:</p>123</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--                <div class="actionDiv col-xs-2" ">-->
+<!--                    <div> Order</div>-->
+<!--                    <div class="input-group">-->
+<!---->
+<!--                        <input type="text" class="form-control" max="2">-->
+<!--                        <span class="input-group-btn">-->
+<!--                        <button class="btn btn-primary " type="button">+</button>-->
+<!--                      </span>-->
+<!--                    </div>-->
+<!--                    <div id="currentQuantity">-->
+<!--                        Quantity at your location: <span style="font-weight:bold">32</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
 
 

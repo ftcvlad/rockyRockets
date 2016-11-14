@@ -61,7 +61,7 @@ function searchItemsToOrder(){
         dataType: "text",
         success: function(resultItems) {
 
-            console.log(resultItems);
+           // console.log(resultItems);
             resultItems = JSON.parse(resultItems);
 
             for (var i=0;i<resultItems.length;i++){
@@ -85,7 +85,7 @@ function searchItemsToOrder(){
                             '<p class="inlineParagraph extraInfo">Weight:</p>'+weight+
                             '<p class="inlineParagraph extraInfo">Balance:</p>'+balance+
                             '</li>';
-                    console.log("racket");
+
                 }
                 else  if (resultItems[i].Color!==undefined){//apparel
                     var color = resultItems[i].Color==null?"":resultItems[i].Color;
@@ -102,18 +102,16 @@ function searchItemsToOrder(){
                         '<p class="inlineParagraph extraInfo">Size:</p>'+size+
                         '<p class="inlineParagraph extraInfo">Gender:</p>'+gender+
                         '</li>';
-                    console.log("apparel");
+
                 }
-                else{
-                    console.log("general");
-                }
+
 
 
 
                 $("#resultHolder").append('' +
                         '<div class="rowDiv" data-id="'+resultItems[i].itemId+'">'+
                             '<div class="dataDiv col-xs-10" >'+
-                                '<img src="/ItemPictures/'+imageSrc+'">'+
+                                '<img src="../../ItemPictures/'+imageSrc+'">'+
                                 '<ul>'+
                                     '<li><p class="inlineParagraph">Brand:</p>'+brand+'</li>'+
                                     '<li><p >Description:</p>'+description+'</li>'+

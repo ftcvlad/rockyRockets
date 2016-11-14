@@ -224,7 +224,7 @@ else {//APPAREL OR RACKET
     print json_encode($rows);
 
 
-    //not ready :(
+
 
 }
 

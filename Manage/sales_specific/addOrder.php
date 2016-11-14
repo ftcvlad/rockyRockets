@@ -27,7 +27,7 @@ $stmt = $connection->prepare($query);
 $stmt->bind_param("iii",$number, $id, $staffId);
 $stmt->execute();
 
-
+//??bugs
 //update number of items at location
 $query2 = "INSERT INTO location_has_differentitem (Location_id, ItemKind_Id, Quantity) VALUES(?,?,?) 
           ON DUPLICATE KEY UPDATE Location_id=Location_id, ItemKind_Id=ItemKind_Id, Quantity=Quantity+VALUES(Quantity)";

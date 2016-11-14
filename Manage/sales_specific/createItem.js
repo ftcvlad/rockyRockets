@@ -201,7 +201,7 @@ function saveItem(){
 
             if (jqXHR.status===500){
 
-                $(".panel-heading").append("<span > database error</span>");
+                $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
             }
             else if (jqXHR.status === 401){
 

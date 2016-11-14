@@ -136,6 +136,7 @@ if (strcmp($category,"general")!==0){
     $stmt->execute();
     if ($stmt===false){//database disconnected or whatever
         http_response_code(500);
+        echo "Database error while executing query";
         return;
     }
 

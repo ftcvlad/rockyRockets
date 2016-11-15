@@ -15,7 +15,7 @@ if (isset($_POST["staffId"])){$staffId =  $_POST["staffId"];}else{exit("somethin
 include "../../includes/db.php";
 
 
-$query = "UPDATE staff SET Salary=? WHERE Id=?";
+$query = "UPDATE man_hr_staff_info SET Salary=? WHERE Id=?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("ii",$newSalary , $staffId);
 if ($stmt===false){//wrong type (if user modified js)

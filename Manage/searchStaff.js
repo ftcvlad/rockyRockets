@@ -15,7 +15,7 @@ $(function(){
             dataType: "text",
             success: function(resultData) {
 
-                $(':nth-child(5)', targetRow).text(resultData);
+                $(':nth-child(6)', targetRow).text(resultData);
             },
             error:function(jqXHR, status, errorText){
 

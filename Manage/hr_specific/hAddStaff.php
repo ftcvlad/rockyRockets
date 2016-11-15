@@ -11,10 +11,9 @@ if (strcmp($_SESSION['user']->department, "Hr")!==0){
 include  "../../includes/db.php";
 
 
-$query = "SELECT staff_department.Id, DepartmentType, LocationType, AddressLine1, Street, City, PostCode
-            FROM staff_department
-            LEFT JOIN location
-            ON location.Id= staff_department.LocationId
+$query = "SELECT DepartmentId, DepartmentType, LocationType, AddressLine1, Street, City, PostCode
+            FROM man_hr_staff_info
+            GROUP BY DepartmentId
             ORDER BY LocationType ASC, PostCode ASC;";
 
 $stmt = $connection->prepare($query);
@@ -110,7 +109,7 @@ include  "../mIncludes/header.php";
                             $depType = $r['DepartmentType'];
 
                             $text = $locType.", ".$depType.", ".$addrstr;
-                            echo "<option value=\"".$r['Id']."\">".$text."</option>";
+                            echo "<option value=\"".$r['DepartmentId']."\">".$text."</option>";
 
 
                         }

@@ -26,7 +26,7 @@ if (strcmp($position,"seller")!==0 && strcmp($position, "manager")!==0){
 
 include  "../../includes/db.php";
 
-$query ="INSERT IGNORE INTO staff (FirstName, LastName,UserName,Password,DepartmentId, Position, Salary)
+$query ="INSERT IGNORE INTO man_hr_staff_info (FirstName, LastName,UserName,Password,DepartmentId, Position, Salary)
         Values(?,?,?,?,?,?,?)";
 
 $stmt = $connection->prepare($query);

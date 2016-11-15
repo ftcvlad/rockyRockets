@@ -664,46 +664,58 @@ PurchaseId</ColNames>
       <DataType>varchar(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="173" parent="19" name="FirstName">
-      <DataType>varchar(50)|0</DataType>
+    <column id="173" parent="18" name="DepartmentId">
+      <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="174" parent="19" name="LastName">
-      <DataType>varchar(50)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="175" parent="19" name="ContactNumber">
-      <DataType>varchar(15)|0</DataType>
-    </column>
-    <column id="176" parent="19" name="Position">
+    <column id="174" parent="18" name="UserName">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="177" parent="19" name="DepartmentPhoneNumber">
-      <DataType>varchar(15)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="178" parent="19" name="DepartmentType">
+    <column id="175" parent="18" name="Password">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="179" parent="19" name="LocationType">
+    <column id="176" parent="19" name="FirstName">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="177" parent="19" name="LastName">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="178" parent="19" name="ContactNumber">
+      <DataType>varchar(15)|0</DataType>
+    </column>
+    <column id="179" parent="19" name="Position">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="180" parent="19" name="DepartmentPhoneNumber">
+      <DataType>varchar(15)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="181" parent="19" name="DepartmentType">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="182" parent="19" name="LocationType">
       <DataType>varchar(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="180" parent="19" name="AddressLine1">
+    <column id="183" parent="19" name="AddressLine1">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="181" parent="19" name="Street">
+    <column id="184" parent="19" name="Street">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="182" parent="19" name="City">
+    <column id="185" parent="19" name="City">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="183" parent="19" name="PostCode">
+    <column id="186" parent="19" name="PostCode">
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>

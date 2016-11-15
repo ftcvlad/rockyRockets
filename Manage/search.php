@@ -6,7 +6,7 @@
 
     if (isset($_POST["criterion"])){    $criterion =  $_POST["criterion"];}else{exit("something went wrong");}
     if (isset($_POST["position"])){$position =  $_POST["position"];}else{exit("something went wrong");}
-
+    if (isset($_POST["position"])){$order =  $_POST["order"];}else{exit("something went wrong");}
 
 
     include  "../includes/db.php";
@@ -31,34 +31,81 @@
     }
 
 
+    $userDepartment = $_SESSION['user']->department;
+
+
     if ($positionCondition && $searchCondition){
-        $query = "SELECT Id,FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
-                FROM staff_info
-                WHERE ((FirstName LIKE ? ESCAPE '!'|| LastName LIKE ? ESCAPE '!')  AND (Position=?))";
+
+        if (strcmp($userDepartment,"Hr")===0){
+            $query = "SELECT Id,FirstName,date(DOB) as Date, LastName, ContactNumber, CONCAT_WS('-', position, DepartmentType) AS Position , Salary ,LocationType
+                FROM man_hr_staff_info
+                WHERE ((FirstName LIKE ? ESCAPE '!'|| LastName LIKE ? ESCAPE '!')  AND (Position=?))
+                 ORDER BY ".$order." ASC";
+        }
+        else if (strcmp($userDepartment,"Sales")===0){
+            $query = "SELECT FirstName, LastName, ContactNumber, CONCAT_WS('-', position, DepartmentType) AS Position,DepartmentPhoneNumber ,LocationType
+                FROM man_sales_staff_info
+                WHERE ((FirstName LIKE ? ESCAPE '!'|| LastName LIKE ? ESCAPE '!')  AND (Position=?))
+                ORDER BY ".$order." ASC";
+        }
 
         $stmt = $connection->prepare($query);
 
         $stmt->bind_param("sss",$escapedPrepCriterion , $escapedPrepCriterion,$position);
     }
     else if ($positionCondition){
-        $query = "SELECT Id, FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
-                FROM staff_info
-                WHERE Position=?";
+
+        if (strcmp($userDepartment,"Hr")===0){
+            $query = "SELECT Id,FirstName,date(DOB) as Date, LastName, ContactNumber, CONCAT_WS('-', position, DepartmentType) AS Position , Salary ,LocationType
+                FROM man_hr_staff_info
+                WHERE Position=?
+                ORDER BY ".$order." ASC";
+        }
+        else if (strcmp($userDepartment,"Sales")===0){
+            $query = "SELECT FirstName, LastName, ContactNumber, CONCAT_WS('-', position, DepartmentType) AS Position,DepartmentPhoneNumber ,LocationType
+                FROM man_sales_staff_info
+                WHERE Position=?
+                ORDER BY ".$order." ASC";
+        }
+
         $stmt = $connection->prepare($query);
         $stmt->bind_param("s",$position);
     }
     else if ($searchCondition){
-        $query = "SELECT Id,FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
-                FROM staff_info
-                WHERE (FirstName LIKE ? ESCAPE '!'|| LastName LIKE ? ESCAPE '!')";
+
+        if (strcmp($userDepartment,"Hr")===0){
+            $query = "SELECT Id,FirstName,date(DOB) as Date, LastName, ContactNumber, CONCAT_WS('-', position, DepartmentType) AS Position , Salary ,LocationType
+                FROM man_hr_staff_info
+                WHERE (FirstName LIKE ? ESCAPE '!'|| LastName LIKE ? ESCAPE '!')
+                ORDER BY ".$order." ASC";
+        }
+        else if (strcmp($userDepartment,"Sales")===0){
+            $query = "SELECT FirstName, LastName, ContactNumber, CONCAT_WS('-', position, DepartmentType) AS Position,DepartmentPhoneNumber ,LocationType
+                FROM man_sales_staff_info
+                WHERE (FirstName LIKE ? ESCAPE '!'|| LastName LIKE ? ESCAPE '!')
+               ORDER BY ".$order." ASC";
+        }
+
+
         $stmt = $connection->prepare($query);
         $stmt->bind_param("ss",$escapedPrepCriterion , $escapedPrepCriterion);
 
     }
     else{
-        $query = "SELECT Id, FirstName, LastName, ContactNumber, Position, Salary, DepartmentType,LocationType
-                FROM staff_info";
+        if (strcmp($userDepartment,"Hr")===0){
+            $query = "SELECT Id,FirstName,date(DOB) as Date, LastName, ContactNumber, CONCAT_WS('-', position, DepartmentType) AS Position , Salary ,LocationType
+                FROM man_hr_staff_info
+                ORDER BY ".$order." ASC";
+        }
+        else if (strcmp($userDepartment,"Sales")===0){
+            $query = "SELECT FirstName, LastName, ContactNumber, CONCAT_WS('-', position, DepartmentType) AS Position,DepartmentPhoneNumber ,LocationType
+                FROM man_sales_staff_info
+                ORDER BY ".$order." ASC";
+        }
+
+
         $stmt = $connection->prepare($query);
+
     }
 
     //bad error reporting upstairs :(

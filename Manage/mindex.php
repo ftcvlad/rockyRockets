@@ -28,36 +28,48 @@
     <div class="panel-heading">Search staff</div>
     <div class="panel-body">
 
-        <div class="input-group input-group-lg">
-            <input type="text" class="form-control" placeholder="Name or surname" id="criteria" name="criterion">
+
+
+
+        <div class="form-inline">
+
+            <div class="input-group input-group-sm" style="margin-right:20px" >
+                <label for="criteria">Name/Surname:</label>
+                <input type="text" class="form-control"  id="criteria" name="criterion">
+            </div>
+
+            <div class="input-group input-group-sm"  style="margin-right:20px">
+                <label for="posSel">Position:</label>
+                <select class="form-control" id="posSel" name="positionCriterion">
+                    <option value="any">Any</option>
+                    <option value="manager">Manager</option>
+                    <option value="seller">Seller</option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-sm"  style="margin-right:20px">
+                <label for="order">Order by:</label>
+                <select class="form-control" id="order" name="orderby">
+                    <option value="Position" selected>Position</option>
+
+                    <?php if (strcmp($_SESSION['user']->department,"Hr")===0){?>
+                        <option value="Salary">Salary</option>
+                    <?php  } ?>
+
+                    <option value="DepartmentType">Department</option>
+                    <option value="LocationType">Location type</option>
+                </select>
+            </div>
         </div>
 
-        <div class="input-group input-group-sm">
-            <label for="posSel">Position:</label>
-            <select class="form-control" id="posSel" name="positionCriterion">
-                <option value="any">Any</option>
-                <option value="manager">Manager</option>
-                <option value="seller">Seller</option>
-
-            </select>
-        </div>
-
-        <button type="button" class="btn btn-primary" onclick="searchStaff()">Find</button>
+        <button type="button" class="btn btn-primary" style="margin-top:20px;" onclick="searchStaff()">Find</button>
 
     </div>
 
     <!-- Table -->
     <table class="table table-striped table-hover">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Phone</th>
-                <th>Position</th>
-                <th>Salary</th>
-                <th>Department</th>
-                <th>LocationType</th>
-            </tr>
+
         </thead>
         <tbody>
 

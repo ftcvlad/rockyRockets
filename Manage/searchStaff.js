@@ -49,12 +49,13 @@ $(function(){
 function searchStaff(){
 
     $("tbody").html('');
+    $("thead").html('');
     $(".panel-heading").find('span').remove();
 
     $.ajax({
         type: 'POST',
         url: "./search.php",
-        data: {criterion:$("#criteria").val(),position:$("#posSel").val() },
+        data: {criterion:$("#criteria").val(),position:$("#posSel").val(), order: $("#order").val() },
         dataType: "text",
         success: function(resultData) {
 
@@ -63,6 +64,7 @@ function searchStaff(){
 
 
             var allRowsArray = response.rowsArray;
+           // console.log(allRowsArray);
             var managerDep = response.managerDep;
 
 
@@ -76,18 +78,59 @@ function searchStaff(){
                 if (managerDep==="Hr"){
                     editStaffString = "<button data-toggle=\"modal\" data-target=\"#myModal\" class=\"cornerButton edit\" onclick=\"addId(this.parentElement.parentElement)\" ><img src=\"images/edit3.png\"></button>"+
                                       "<button class=\"cornerButton delete\" onclick=\"\" ><img src=\"images/delete.png\"></button>";
+
+
+
+                    $("thead").append("<tr>" +
+                                            "<th>Name</th>"+
+                                            "<th>Surname</th>"+
+                                            "<th>Phone</th>"+
+                                            "<th>Position</th>"+
+                                            "<th>Dob</th>"+
+                                            "<th>Salary</th>"+
+                                            "<th>LocationType</th>"+
+                                        "</tr>");
+
+
+                    for (var i=0;i<allRowsArray.length;i++){
+                        $("tbody").append("<tr data-id=\'"+allRowsArray[i].Id+"\'>"+
+                            "<td>"+editStaffString+allRowsArray[i].FirstName+"</td>" +
+                            "<td>"+allRowsArray[i].LastName+"</td>"+
+                            "<td>"+(allRowsArray[i].ContactNumber===null?"":allRowsArray[i].ContactNumber)+"</td>"+
+                            "<td>"+allRowsArray[i].Position+"</td>"+
+                            "<td>"+(allRowsArray[i].Date===null?"":allRowsArray[i].Date)+"</td>"+
+                            "<td>"+allRowsArray[i].Salary+"</td>"+
+                            "<td>"+allRowsArray[i].LocationType+"</td>"+"</tr>");
+                    }
+
+                }
+                else if (managerDep==="Sales"){
+
+                    $("thead").append("<tr>" +
+                        "<th>Name</th>"+
+                        "<th>Surname</th>"+
+                        "<th>Phone</th>"+
+                        "<th>Position</th>"+
+                        "<th>DepartmentPhone</th>"+
+                        "<th>LocationType</th>"+
+                        "</tr>");
+
+
+                    for ( i=0;i<allRowsArray.length;i++){
+                        $("tbody").append("<tr>"+
+                            "<td>"+editStaffString+allRowsArray[i].FirstName+"</td>" +
+                            "<td>"+allRowsArray[i].LastName+"</td>"+
+                            "<td>"+(allRowsArray[i].ContactNumber===null?"":allRowsArray[i].ContactNumber)+"</td>"+
+                            "<td>"+allRowsArray[i].Position+"</td>"+
+                            "<td>"+allRowsArray[i].DepartmentPhoneNumber+"</td>"+
+                            "<td>"+allRowsArray[i].LocationType+"</td>"+"</tr>");
+                    }
+
+
+
                 }
 
-               for (var i=0;i<allRowsArray.length;i++){
-                    $("tbody").append("<tr data-id=\'"+allRowsArray[i].Id+"\'>"+
-                                            "<td>"+editStaffString+allRowsArray[i].FirstName+"</td>" +
-                                            "<td>"+allRowsArray[i].LastName+"</td>"+
-                                            "<td>"+allRowsArray[i].ContactNumber+"</td>"+
-                                            "<td>"+allRowsArray[i].Position+"</td>"+
-                                            "<td>"+allRowsArray[i].Salary+"</td>"+
-                                            "<td>"+allRowsArray[i].DepartmentType+"</td>"+
-                                            "<td>"+allRowsArray[i].LocationType+"</td>"+"</tr>");
-               }
+
             }
         },
         error:function(jqXHR, status, errorText){

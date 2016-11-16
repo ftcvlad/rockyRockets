@@ -40,6 +40,41 @@ $(function(){
 
     });
 
+    $('#modalDeleteSubmitButton').bind('click', function(){
+        $(".panel-heading").find('span').remove();
+
+        $.ajax({
+            type: 'POST',
+            url: "./hr_specific/deleteUser.php",
+            data: {staffId:$(targetRow).data("id") },
+            dataType: "text",
+            success: function(responseText) {
+
+                $(".panel-heading").append("<span > "+responseText+"</span>");
+                $(targetRow).remove();
+
+            },
+            error:function(jqXHR, status, errorText){
+
+                if (jqXHR.status===500){
+
+                    $(".panel-heading").append("<span > database error</span>");
+                }
+                else if (jqXHR.status === 401){
+
+                    $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
+                }
+                else if (jqXHR.status === 404){
+
+                    $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
+                }
+            }
+
+        });
+
+
+    });
+
 
 
 });
@@ -77,7 +112,7 @@ function searchStaff(){
                 var editStaffString="";
                 if (managerDep==="Hr"){
                     editStaffString = "<button data-toggle=\"modal\" data-target=\"#myModal\" class=\"cornerButton edit\" onclick=\"addId(this.parentElement.parentElement)\" ><img src=\"images/edit3.png\"></button>"+
-                                      "<button class=\"cornerButton delete\" onclick=\"\" ><img src=\"images/delete.png\"></button>";
+                                      "<button class=\"cornerButton delete\" data-toggle=\"modal\" data-target=\"#myDeleteModal\"  onclick=\"addIdToDeleteModal(this.parentElement.parentElement)\" ><img src=\"images/delete.png\"></button>";
 
 
 
@@ -173,6 +208,13 @@ function logoutF(){
     });
 }
 
+
+function addIdToDeleteModal(target){
+
+
+    $("#myDeleteModal").find("h4").text($(':nth-child(1)', target).text()+" "+$(':nth-child(2)', target).text()  );
+    targetRow = target;
+}
 
 
 

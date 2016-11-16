@@ -28,6 +28,9 @@ if (strcmp($category, "apparel")===0){
     $size = empty($_POST["size"])?NULL:$_POST["size"];
     $color = empty($_POST["color"])?NULL:$_POST["color"];
     $forMen = empty($_POST["forMen"])?NULL:$_POST["forMen"];//"true" converted to true autcmatically
+    if (strcmp($_POST["forMen"],"0")===0){
+        $forMen=0;
+    }
     //echo $price." ".$description." ".$supplierId." ".$category." ".$brand." ".$itemCode." ".$size." ".$color." ".$forMen;
 
 }

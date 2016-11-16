@@ -40,7 +40,7 @@ if (strcmp($category,"general")===0){//GENERAL
 //                    LEFT JOIN Location_has_DifferentItem  ON Location_has_DifferentItem.ItemKind_Id = DifferentItem.Id
 //                    WHERE Category='general' AND Location_Id=?";
 
-            $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity
+            $query = " SELECT Id as itemId,Price,Brand,Description,ImagePath, Quantity
                        FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) as a
                        Right JOIN
                             (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' ) as b
@@ -53,7 +53,7 @@ if (strcmp($category,"general")===0){//GENERAL
         }
         else{
 
-            $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity
+            $query = " SELECT Id as itemId,Price,Brand,Description,ImagePath, Quantity
                        FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) as a
                        Right JOIN
                             (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Brand=?) as b
@@ -76,7 +76,7 @@ if (strcmp($category,"general")===0){//GENERAL
         $escapedDescription = "%".$description."%";
 
         if (!$hasBrand){
-            $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity
+            $query = " SELECT Id as itemId,Price,Brand,Description,ImagePath, Quantity
                        FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) as a
                        Right JOIN
                             (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Description LIKE ? ESCAPE '!') as b
@@ -85,7 +85,7 @@ if (strcmp($category,"general")===0){//GENERAL
             $stmt->bind_param("ss",$currentUserLocationId,$escapedDescription );
         }
         else{
-            $query = " SELECT Id,Price,Brand,Description,ImagePath, Quantity
+            $query = " SELECT Id as itemId,Price,Brand,Description,ImagePath, Quantity
                        FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=?) as a
                        Right JOIN
                             (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Brand=? AND Description LIKE ? ESCAPE '!') as b

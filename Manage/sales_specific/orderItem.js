@@ -180,6 +180,7 @@ function orderItem(elem){
         dataType: "text",
         success: function(addedQuantity) {
 
+
             targetInput.val('');
             var currentAmountElem = $(elem).closest(".rowDiv").find(".quantitySpan");
             currentAmountElem.text(parseInt(currentAmountElem.text())+parseInt(addedQuantity));

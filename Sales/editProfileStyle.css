@@ -1,0 +1,17 @@
+.mandatory:after{
+    content:"*";
+    color:red;
+}
+
+.panel{
+    width:80%;
+    margin:auto;
+}
+
+h2{
+    padding-left:100px;
+}
+
+#errorPar{
+    color:red;
+}

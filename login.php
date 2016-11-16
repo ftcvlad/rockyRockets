@@ -57,12 +57,15 @@ else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){
 
                 if (strcmp($loginType, "manager")===0){
                     $redirPage = "Manage/mindex.php";
+                    $userObject = (object) array('username' => $username, 'position' => $loginType, 'department'=>$row['DepartmentType'],
+                        'locationId'=>$row['LocationId'], 'staffId'=>$row['Id']);
                 }
                 else if (strcmp($loginType, "seller")===0){
-                    $redirPage = "seller.html";
+                    $redirPage = "Sales/home.php";
+
+                    $userObject = (object) array('username' => $username, 'position' => $loginType,'staffId'=>$row['Id']);
                 }
-                $userObject = (object) array('username' => $username, 'position' => $loginType, 'department'=>$row['DepartmentType'],
-                                            'locationId'=>$row['LocationId'], 'staffId'=>$row['Id']);
+
                 session_start();
                 $_SESSION['user'] = $userObject;
                 echo $redirPage;

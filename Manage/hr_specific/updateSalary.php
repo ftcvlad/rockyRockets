@@ -10,6 +10,11 @@ if (strcmp($_SESSION['user']->department, "Hr")!==0){
 if (isset($_POST["newSalary"])){    $newSalary =  $_POST["newSalary"];}else{exit("something went wrong");}
 if (isset($_POST["staffId"])){$staffId =  $_POST["staffId"];}else{exit("something went wrong");}
 
+if (!ctype_digit($newSalary) || $newSalary<0){
+    http_response_code(404);
+    die ("Incorrect salary value");
+
+}
 
 
 include "../../includes/db.php";

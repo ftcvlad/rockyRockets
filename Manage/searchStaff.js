@@ -8,10 +8,17 @@ $(function(){
     $('#modalSubmitButton').bind('click', function(){
         $(".panel-heading").find('span').remove();
 
+        var salary = $("#salary").val();
+        if ( !$.isNumeric(salary) || salary<0){
+            $(".panel-heading").append("<span > Incorrect salary value!</span>");
+            return;
+        }
+
+
         $.ajax({
             type: 'POST',
             url: "./hr_specific/updateSalary.php",
-            data: {newSalary:$("#salary").val(),staffId:$(targetRow).data("id") },
+            data: {newSalary:salary,staffId:$(targetRow).data("id") },
             dataType: "text",
             success: function(resultData) {
 

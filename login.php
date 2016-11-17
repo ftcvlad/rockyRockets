@@ -4,7 +4,7 @@
 include "includes/db.php";
 
 
- if (isset($_POST["username"])){    $username =  $_POST["username"];}else{exit("something went wrong");}
+if (isset($_POST["username"])){    $username =  $_POST["username"];}else{exit("something went wrong");}
 if (isset($_POST['password'])){    $password =  $_POST['password'];}else{exit("something went wrong");}
 if (isset($_POST['type'])){    $loginType = $_POST['type'];}else{exit("something went wrong");}
 
@@ -15,11 +15,9 @@ if ( strcmp($loginType,"customer")===0){
 }
 else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){
 
-    $query = " SELECT UserName, Password, Position , DepartmentType, LocationId, staff.Id
-               FROM staff 
-               LEFT JOIN staff_department
-               ON staff_department.Id=staff.DepartmentId
-               WHERE (Position=? AND UserName=?)";
+    $query = "SELECT * 
+              FROM all_login
+              WHERE (Position=? AND UserName=?)";
 
 
     //$stmt = $connection->prepare("SELECT UserName, Password, Position FROM staff WHERE (Position=? AND UserName=?)");
@@ -63,7 +61,7 @@ else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){
                 else if (strcmp($loginType, "seller")===0){
                     $redirPage = "Sales/home.php";
 
-                    $userObject = (object) array('username' => $username, 'position' => $loginType,'staffId'=>$row['Id']);
+                    $userObject = (object) array('username' => $username, 'position' => $loginType,'staffId'=>$row['Id'], 'locationId'=>$row['LocationId']);
                 }
 
                 session_start();

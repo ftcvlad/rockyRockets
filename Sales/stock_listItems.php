@@ -19,6 +19,7 @@ $brand = $_POST["brand"];
 
 
 $staffId = $_SESSION['user']->staffId;
+$locationId = $_SESSION['user']->locationId;
 
 if (strcmp($category,"general")===0){//GENERAL
 
@@ -30,34 +31,31 @@ if (strcmp($category,"general")===0){//GENERAL
     if (!$hasDescription){
 
         if (!$hasBrand){
-            //where executed first ! so, 1) gets all with 'general' 2) gets all with location 3) right joins
-//            $query = "SELECT Id,Price,Brand,Description,ImagePath, Quantity FROM DifferentItem
-//                    LEFT JOIN Location_has_DifferentItem  ON Location_has_DifferentItem.ItemKind_Id = DifferentItem.Id
-//                    WHERE Category='general' AND Location_Id=?";
+
 
             $query = " SELECT Id as itemId,Price,Brand,Description,ImagePath, Quantity
-                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=(SELECT locationId from staff_department where staff_department.Id= (SELECT DepartmentId FROM staff WHERE staff.Id=?))) as a
+                       FROM (SELECT Quantity, ItemKind_Id FROM seller_item_location Where Location_Id=?) as a
                        Right JOIN
-                            (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' ) as b
+                            (SELECT * FROM seller_general ) as b
                        ON a.ItemKind_id = b.Id";
 
 
             $stmt = $connection->prepare($query);
-            $stmt->bind_param("i",$staffId);
+            $stmt->bind_param("i",$locationId);
 
         }
         else{
 
             $query = " SELECT Id as itemId,Price,Brand,Description,ImagePath, Quantity
-                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=(SELECT locationId from staff_department where staff_department.Id= (SELECT DepartmentId FROM staff WHERE staff.Id=?))) as a
+                       FROM (SELECT Quantity, ItemKind_Id FROM seller_item_location Where Location_Id=?) as a
                        Right JOIN
-                            (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Brand=?) as b
+                            (SELECT * FROM seller_general WHERE Brand=?) as b
                        ON a.ItemKind_id = b.Id";
 
 
             $stmt = $connection->prepare($query);
 
-            $stmt->bind_param("is",$staffId,$brand);
+            $stmt->bind_param("is",$locationId,$brand);
         }
 
     }
@@ -72,22 +70,22 @@ if (strcmp($category,"general")===0){//GENERAL
 
         if (!$hasBrand){
             $query = " SELECT Id as itemId,Price,Brand,Description,ImagePath, Quantity
-                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=(SELECT locationId from staff_department where staff_department.Id= (SELECT DepartmentId FROM staff WHERE staff.Id=?))) as a
+                       FROM (SELECT Quantity, ItemKind_Id FROM seller_item_location Where Location_Id=?) as a
                        Right JOIN
-                            (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Description LIKE ? ESCAPE '!') as b
+                            (SELECT * FROM seller_general WHERE Description LIKE ? ESCAPE '!') as b
                        ON a.ItemKind_id = b.Id";
             $stmt = $connection->prepare($query);
-            $stmt->bind_param("ss",$staffId,$escapedDescription );
+            $stmt->bind_param("ss",$locationId,$escapedDescription );
         }
         else{
             $query = " SELECT Id as itemId,Price,Brand,Description,ImagePath, Quantity
-                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=(SELECT locationId from staff_department where staff_department.Id= (SELECT DepartmentId FROM staff WHERE staff.Id=?))) as a
+                       FROM (SELECT Quantity, ItemKind_Id FROM seller_item_location Where Location_Id=?) as a
                        Right JOIN
-                            (SELECT Id,Price,Brand,Description,ImagePath FROM differentitem WHERE Category='general' AND Brand=? AND Description LIKE ? ESCAPE '!') as b
+                            (SELECT * FROM seller_general WHERE Brand=? AND Description LIKE ? ESCAPE '!') as b
                        ON a.ItemKind_id = b.Id";
 
             $stmt = $connection->prepare($query);
-            $stmt->bind_param("sss",$staffId, $brand, $escapedDescription);
+            $stmt->bind_param("sss",$locationId, $brand, $escapedDescription);
         }
     }
     $stmt->execute();
@@ -104,14 +102,14 @@ if (strcmp($category,"general")===0){//GENERAL
 }
 else {//APPAREL OR RACKET
 
-    $attributeTableName="";
+    $viewName="";
     $extraSearchCriterionValue="";
     $extraSearchCriterion="";
     $col1 = "";
     $col2 = "";
     $col3 = "";
     if (strcmp($category,"apparel")===0){
-        $attributeTableName = "apparelattribute";
+        $viewName = "seller_apparel";
         $extraSearchCriterionValue = $_POST["color"];
         $extraSearchCriterion ="Color";
         $col1 ="Size";
@@ -120,7 +118,7 @@ else {//APPAREL OR RACKET
 
     }
     else {
-        $attributeTableName = "racketattribute";
+        $viewName = "seller_racket";
         $extraSearchCriterionValue = $_POST["sport"];
         $extraSearchCriterion="Sport";
         $col1 ="Sport";
@@ -176,35 +174,32 @@ else {//APPAREL OR RACKET
     }
 
     $query = " SELECT itemId,Price,Brand,Description,ImagePath, Quantity, ".$col1.", ".$col2.", ".$col3."
-                       FROM (SELECT Quantity, ItemKind_Id FROM Location_has_DifferentItem Where Location_Id=(SELECT locationId from staff_department where staff_department.Id= (SELECT DepartmentId FROM staff WHERE staff.Id=?))) AS a
+                       FROM (SELECT Quantity, ItemKind_Id FROM seller_item_location Where Location_Id=?) AS a
                        Right JOIN
-                            (SELECT DifferentItem.Id as itemId,Price,Brand,Description,ImagePath, ".$col1.", ".$col2.", ".$col3."
-                                FROM DifferentItem 
-                                INNER JOIN ".$attributeTableName." 
-                                ON DifferentItem.Id=".$attributeTableName.".Id
-                                ".$whereStr." ) as b
+                            (SELECT itemId,Price,Brand,Description,ImagePath, ".$col1.", ".$col2.", ".$col3."
+                                FROM ".$viewName." ".$whereStr." ) as b
                        ON a.ItemKind_id = b.itemId";
 
 
 
 
 
-    // echo $query;
+     //echo $query;
 
     $stmt = $connection->prepare($query);
 
 
     if ($count===0){
-        $stmt->bind_param("i",$staffId);
+        $stmt->bind_param("i",$locationId);
     }
     else if ($count===1){
-        $stmt->bind_param("is",$staffId, $criteriaValues[0]);
+        $stmt->bind_param("is",$locationId, $criteriaValues[0]);
     }
     else if ($count===2){
-        $stmt->bind_param("iss",$staffId, $criteriaValues[0], $criteriaValues[1]);
+        $stmt->bind_param("iss",$locationId, $criteriaValues[0], $criteriaValues[1]);
     }
     else if ($count===3){
-        $stmt->bind_param("isss",$staffId, $criteriaValues[0], $criteriaValues[1],$criteriaValues[2]);
+        $stmt->bind_param("isss",$locationId, $criteriaValues[0], $criteriaValues[1],$criteriaValues[2]);
     }
 
 

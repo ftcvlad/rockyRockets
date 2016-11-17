@@ -203,7 +203,7 @@ function addId(target){
 
 
 function logoutF(){
-    $.post("./logout.php",function(){
+    $.post("../logout.php",function(){
         window.location  = "../loginPage.php";
     });
 }

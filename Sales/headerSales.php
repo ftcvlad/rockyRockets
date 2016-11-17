@@ -1,4 +1,6 @@
 
+<script src="logout.js"></script>
+<link rel="stylesheet" href="headerSales.css">
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -11,7 +13,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="staffprofile.php"><?php echo $_SESSION['user']->username.", Seller" ?></a>
+            <a class="navbar-brand hoverable" href="staffprofile.php"><?php echo $_SESSION['user']->username.", Seller" ?></a>
 
 
 
@@ -23,7 +25,7 @@
 
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stock<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle hoverable" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stock<span class="caret"></span></a>
                     <ul class="dropdown-menu">
 
                         <li><a href="hCheck_stock.php">Check Stock in All Locations</a></li>
@@ -32,13 +34,22 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Customer<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle hoverable" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Customer<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="customerpurchases.php">Check Customer Purchases</a></li>
 
 
                     </ul>
                 </li>
+
+
+
+
+            </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class='hoverable'><span onclick='logoutF();'>Logout</span></a></li>
             </ul>
 
 

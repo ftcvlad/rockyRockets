@@ -14,10 +14,8 @@ include "../includes/db.php";
 
 
 
-$query = "SELECT Quantity, LocationType, AddressLine1, Street,City,PostCode 
-            FROM location
-            RIGHT JOIN location_has_differentitem
-            ON location.id=location_has_differentitem.Location_Id
+$query = "SELECT *
+            FROM seller_item_location
             WHERE ItemKind_id=?";
 
 

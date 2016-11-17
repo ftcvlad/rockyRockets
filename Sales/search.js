@@ -183,7 +183,7 @@ function checkStock(elem){
         dataType: "text",
         success: function(resultArray) {
 
-            console.log(resultArray);
+          //  console.log(resultArray);
 
             var resultArray = JSON.parse(resultArray);
 
@@ -201,14 +201,7 @@ function checkStock(elem){
 
             }
 
-            //
-            // <tr>
-            // <td>15</td>
-            // <td>room 6</td>
-            // <td>Perth rd</td>
-            // <td>Dundee</td>
-            // <td>DD1 1NN</td>
-            // </tr>
+
 
 
 

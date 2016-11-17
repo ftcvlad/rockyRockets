@@ -9,8 +9,7 @@ include '../includes/db.php';
 $staffId = $_SESSION['user']->staffId;
 
 
-//$sql = "SELECT  FirstName, LastName, DOB, ContactNumber, Email, UserName, Position, Salary FROM staff WHERE Id =".$staffId;
-
+//http://stackoverflow.com/questions/3966747/how-to-call-a-mysql-stored-procedure-from-within-php-code
 $stmt = $connection->prepare("CALL  viewProfileStaffProcedure(?)");
 $stmt->bind_param("i",$staffId);
 if ($stmt===false){
@@ -20,18 +19,8 @@ if ($stmt===false){
 }
 $stmt->execute();
 
-//http://stackoverflow.com/questions/3966747/how-to-call-a-mysql-stored-procedure-from-within-php-code
-
-//vs
-
-//http://php.net/manual/en/mysqli.quickstart.stored-procedures.php
 $res = $stmt->get_result();
-
 $resultArray = mysqli_fetch_array($res);
-
-
-
-
 
 $FirstName = $resultArray['FirstName'];
 $LastName = $resultArray['LastName'];

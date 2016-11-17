@@ -53,7 +53,7 @@
                         echo "<li><a class='hoverable' href='".$root."Manage/hr_specific/hAddStaff.php'><span onclick=''>Add staff</span></a></li>";
                     }
                     echo "<li><a class='hoverable' href='".$root."Manage/mindex.php'><span >Search staff</span></a></li>";
-                    echo "<li><a class='hoverable'><span onclick='logoutF();'>Logout</span></a></li>";
+                    echo "<li><a class='hoverable' onclick='logoutF();'><span >Logout</span></a></li>";
 
 
                 ?>

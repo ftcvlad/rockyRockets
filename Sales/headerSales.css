@@ -1,0 +1,5 @@
+.hoverable:hover{
+    background-color: #dedede !important;
+    cursor: pointer;
+}
+

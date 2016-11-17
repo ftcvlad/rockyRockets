@@ -81,6 +81,7 @@ tr:hover .cornerButton{
 
 .hoverable:hover{
     background-color: #dedede !important;
+    cursor: pointer;
 }
 
 /*add staff*/

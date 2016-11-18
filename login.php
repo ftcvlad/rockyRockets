@@ -10,10 +10,44 @@ if (isset($_POST['type'])){    $loginType = $_POST['type'];}else{exit("something
 
 
 
-if ( strcmp($loginType,"customer")===0){
+if ( strcmp($loginType,"customer")===0){//CUSTOMER
 
+    $query = "SELECT Password, Id FROM customer WHERE (UserName=?)";
+
+    $stmt = $connection->prepare($query);
+
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    if (!$res){
+        http_response_code(500);
+        return;
+    }
+    else{
+        if ($res->num_rows === 0){
+            http_response_code(401);
+            die("Invalid username");
+        }
+        else{
+
+            $row = $res->fetch_assoc();
+            if (strcmp($row['Password'], $password)!==0){
+                http_response_code(401);
+                die ("Invalid password");
+            }
+            else{
+                $redirPage = "Client/Index.php";
+                $userObject = (object) array('username' => $username, 'position' => $loginType,'customerId'=>$row['Id']);
+                session_start();
+                $_SESSION['user'] = $userObject;
+                echo $redirPage;
+            }
+        }
+
+    }
 }
-else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){
+else if (strcmp($loginType,"manager")===0 || strcmp($loginType,"seller")===0){//STAFF
 
     $query = "SELECT * 
               FROM all_login

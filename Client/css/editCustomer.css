@@ -1,0 +1,13 @@
+.panel{
+    width:80%;
+    margin:auto;
+    margin-bottom: 100px;
+}
+
+h2{
+    padding-left:100px;
+}
+
+#errorPar{
+    color:red;
+}

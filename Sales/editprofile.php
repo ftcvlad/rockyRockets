@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="editProfileStyle.css">
+    <script src="editProfileJs.js"></script>
 
 </head>
 <body>
@@ -40,7 +41,7 @@ $Password = $resultArray['Password'];
 ?>
 
 <?php
-include "./headerSales.php";
+    include "./headerSales.php";
 ?>
 
 
@@ -110,9 +111,16 @@ include "./headerSales.php";
             <div class="form-group row">
                  <label class="control-label col-sm-2 "></label>
 
-                <?php if($_GET && $_GET['result']){?>
+
+
+
+                <?php if ($_GET && $_GET['result']): ?>
                     <p id="errorPar"><?php echo $_GET['result']?></p>
-                <?php } ?>
+                <?php else: ?>
+                    <p id="errorPar"></p>
+                <?php endif; ?>
+
+
 
             </div>
         </form>

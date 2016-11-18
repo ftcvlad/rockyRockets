@@ -25,14 +25,16 @@
 
         }
         else if (strcmp($userType, "seller")===0){
-           //go somewhere else
+            header('Location: /2016-ac32006/team13/rockyRockets/Sales/home.php', true, 302);
+            exit();
 
         }
         else if (strcmp($userType, "customer")===0){
-            //and else
+            header('Location: /2016-ac32006/team13/rockyRockets/Client/Index.php', true, 302);
+            exit();
         }
 
-       //return;
+
 
     }
     else{

@@ -1,0 +1,41 @@
+<?php 
+
+session_start();
+include '../includes/db.php';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rackets</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+<?php include 'nav.php';?>
+
+<h1>Rackets</h1>
+
+
+<?php
+
+$query ="UPDATE customer SET AvailableOnline = ?,
+..
+..
+..";
+
+
+?>
+
+<p>
+	<h2>Purchase successful.</h2>
+</p>
+
+</body>
+</html>

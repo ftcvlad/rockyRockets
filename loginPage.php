@@ -37,7 +37,7 @@
             </div>
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" onclick="checkLoginDetails()">Sign in</button>
         </div>
-        <a href="registerCustomer.html" class="forgot-password">
+        <a href="registerCustomer.php" class="forgot-password">
             Register as customer
         </a>
         <p id="error"></p>

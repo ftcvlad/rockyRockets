@@ -1,6 +1,6 @@
 <?php
-session_start();
-include '../includes/db.php';
+include './ensureCustomerAuthenticated.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -12,35 +12,56 @@ include '../includes/db.php';
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/removeFromCart.js"></script>
 </head>
 <body>
 
 
 
 <?php include 'nav.php';?>
+<script>  $("#basket").addClass("active");</script>
+
 <h3> Your basket </h3>
+
+    <?php if (sizeof($_SESSION['cart'])>0){?>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Brand</th>
+                    <th>Description</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php
+                        foreach($_SESSION['cart'] as $item) {
+                                   echo "<tr data-id='".$item->Id."'>
+                                            <td>".$item -> Quantity."</td>
+                                            <td>".$item -> Price."</td>
+                                            <td>".$item -> Brand."</td>
+                                            <td>".$item -> Description."</td>
+                                            <td><button>Remove</button></td>
+                                            
+                                        </tr>";
+
+                        }
+            ?>
+
+            </tbody>
+
+
+        </table>
+    <?php }?>
 <?php
 
-$whereIn = implode(',', $_SESSION['Cart']);
 
-$totalItems = count($_SESSION['Cart']);
 
-echo '<p>You have : ';
-echo $totalItems/4;
-echo ' product(s) in your basket.';
 
-$i = 0;
 
-//Maybe this for selection every 4th entry in the array?
-//
-//foreach($_SESSION['Cart'] as $value) {
-//    if ($i++ % 4 == 0) {
-//        $_SESSION['Cart'][] = $value;
-//}}
 
-foreach ($_SESSION['Cart'] as $key => $value) {
-	echo "<p>{$key} => {$value}";
-}
 
 ?>
 

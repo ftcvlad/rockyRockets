@@ -19,10 +19,13 @@
 <body>
 
 
-<!-- Including the nav.php file so the navbar functions -->
-
     <?php
-    session_start();
+    include 'nav.php';
+    ?>
+
+    <script>  $("#profile").addClass("active");</script>
+    <?php
+
     include 'nav.php';
     include "../includes/db.php";
 

@@ -16,7 +16,9 @@
         <?php
             session_start();
             include 'nav.php';
+
         ?>
+        <script>  $("#home").addClass("active");</script>
 
         <h4 style="margin-top:100px; text-align: center">
             <!-- Checking the session and producing a nice welcome message using the users stored details. -->

@@ -1,4 +1,5 @@
 <script src="js/logout.js"></script>
+<link rel="stylesheet" href="./css/navStyles.css">
 <div class="jumbotron text-center">
     <h1>Rocky Rackets</h1>
     <p>Tennis equipment to make a racket about!</p>
@@ -19,10 +20,10 @@
     <!-- Navbar to the left -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="rackets.php">Rackets</a></li>
-        <li><a href="menApparel.php">Men's Apparel</a></li>
-        <li><a href="womenApparel.php">Women's Apparel</a></li>
-		<li><a href="about.php">About Us</a></li>
+        <li><a href="rackets.php" id="racket">Rackets</a></li>
+        <li><a href="menApparel.php" id="man">Men's Apparel</a></li>
+        <li><a href="womenApparel.php" id="woman">Women's Apparel</a></li>
+		<li><a href="about.php" id="about">About Us</a></li>
 
       </ul>
 	  
@@ -35,15 +36,15 @@
       
 	  <!-- Navbar to the right -->
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="Index.php">Home</a></li>
+      <li><a href="Index.php" id="home">Home</a></li>
 
 
 
           <?php if (isset($_SESSION['user']) && strcmp($_SESSION['user']->position,"customer")===0): ?>
 
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle hoverable" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
+              <li class="dropdown" >
+                  <a href="#" class="dropdown-toggle hoverable" id="profile" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+                  <ul class="dropdown-menu" >
 
                       <li><a href="viewOrders.php">View orders</a></li>
                       <li><a href="editProfile.php">Edit profile</a></li>
@@ -51,7 +52,7 @@
 
                   </ul>
               </li>
-              <li><a href="shoppingCart.php">Basket</a></li>
+              <li><a href="shoppingCart.php" id="basket">Basket</a></li>
 
           <?php else: ?>
               <li><a href="../loginPage.php">Sign in</a></li>

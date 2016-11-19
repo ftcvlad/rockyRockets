@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/addToCart.js"></script>
 </head>
 <body>
 
@@ -17,15 +18,8 @@
     include 'nav.php';
 ?>
 
-<h1>Rackets</h1>
+<script>  $("#racket").addClass("active");</script>
 
-<form action="shoppingCart.php">
-<button class='btn btn-primary'>Shopping Cart</button><p>
-</form>
-
-<?php
-
-?>
 
 <?php
 include '../includes/db.php';
@@ -68,8 +62,8 @@ while($rows=mysqli_fetch_array($res)){
     $Brand = $rows['Brand'];
     $Price = $rows['Price'];
     $ImagePath = $rows['ImagePath']==NULL?"noImage.png":$rows['ImagePath'];
-    $Discount = $rows['Discount'];
-    $AvailableOnline = $rows['AvailableOnline'];
+
+
     $Sport = $rows['Sport'];
     $Balance = $rows['Balance'];
     $Weight = $rows['Weight'];
@@ -81,85 +75,74 @@ while($rows=mysqli_fetch_array($res)){
     echo" 
 	  
 			<div class='col-sm-6 col-md-4'>
-			<div class='thumbnail'>
-			<h3 style='padding: 0px 10px;'>$Description</h3>
-			<h4 style='padding: 0px 10px;'>£$Price</h3>
-			<h4 style='padding: 0px 10px;'>$Brand</h3>
-			<h4 style='padding: 0px 10px;'>$AvailableOnline available</h3>
+                <div class='thumbnail' data-desc='$Description' data-id='$Id' data-price='$Price' data-brand='$Brand' data-img='$ImagePath' data-sport='$Sport' data-weight='$Weight' data-balance='$Balance'>
+                    <h3 style='padding: 0px 10px;' >$Description</h3>
+                    <h4 style='padding: 0px 10px;'>£$Price</h3>
+                    <h4 style='padding: 0px 10px;'>$Brand</h3>
+                  
+                    <img src=../ItemPictures/$ImagePath width='300' height='300' style='padding: 10px 5px;' />
+                    
+                    <!-- More info button to see more information about the product, buy it, etc. -->
+                    <button type='button' class='btn btn-primary btn-lg' onclick='addModal(this, 0)' >More info</button>
+    
+                </div>
+			</div>	
 			
-			<img src=../ItemPictures/$ImagePath width='300' height='300' style='padding: 10px 5px;' />
-		  
-			
-			
-			
-
-			<div class='modal fade' id='$i' tabindex='-1' role='dialog'>
-				<div class='modal-dialog' role='document'>
-					<div class='modal-content'>
-						<div class='modal-header'>
-							<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-							<h3>$Brand</h3>
-							<h4 class='modal-title'>$Description</h4>
-						</div>
-
-			
-						<div class='modal-body' align='center'>
-
-							<img src=../ItemPictures/$ImagePath width='300' height='300' style='padding: 10px 5px;' />
-							<h1>£$Price</h1>
-							<h4>_____</h4>
-							<h4>$Sport</h4>
-							<h4>$Balance mm</h4>
-							<h4>$Weight g</h4>
-						</div>
-
-						<div class='modal-footer' style='padding: 20px 5px;'>
-							<button type='button' class='btn btn-default' style='float: left;' data-dismiss='modal'>Cancel</button>
-					
-							<!-- This is the Purchase option. This will add it to the basket. -->
-						
-						
-							<form action='addtoCart.php?'>
-								<button type='submit' value='$Description' name='Description' class='btn btn-primary'>
-								<input type='hidden' value='$Id' name='Id'>
-								<input type='hidden' value='$Brand' name='Brand'>
-								<input type='hidden' value='$Price' name='Price'>
-								Add to basket</button>			
-							</form>
-
-
-						</div>	
-
-					</div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->  
-
-			
-			<!-- More info button to see more information about the product, buy it, etc. -->
-			<p><button type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#$i'>
-			More info
-			</button></p>
-
-
-			</div>
-			</div>
-			
-	
-			
-
 				
 	  ";
 
-
-
-
 }
-
-
 
 ?>
 
 
-	
+
+    <div class='modal ' id='addToBasketModal' tabindex='-1' role='dialog' data-id="">
+        <div class='modal-dialog' role='document'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+
+                    <!-- Update basket -->
+                    <!-- This is the name of the product -->
+                    <h3 id="modalBrand"></h3>
+                    <h4 id="modalDescription" class='modal-title'></h4>
+                </div>
+
+                <!-- This is the image of the item -->
+                <!-- Image variable here -->
+                <div class='modal-body' align='center'>
+                    <img id="modalImg" width='300' height='300' style='padding: 10px 5px;' />
+
+                    <h1 id="modalPrice"></h1>
+                    ______
+                    <h4 id="modalSport"></h4>
+                    <h4 id="modalBalance"></h4>
+                    <h4 id="modalWeight"></h4>
+                </div>
+
+                <!-- This is the divider for the buttons in the script -->
+                <div class='modal-footer form-inline' style='padding: 20px 5px;' >
+
+                    <!-- This part offers a cancel option to close the pop-up -->
+                    <button type='button' class='btn btn-default' style='float: left;' data-dismiss='modal'>Cancel</button>
+
+                    <select name='Quantity' class='form-control' id="modalQuantity">
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='5'>5</option>
+                        <option value='10'>10</option>
+                    </select>
+
+                    <button type='submit' class='btn btn-primary' onclick="addToBasket()" >  Add to basket</button>
+
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
 </body>
 </html>

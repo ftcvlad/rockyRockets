@@ -41,6 +41,7 @@ if ( strcmp($loginType,"customer")===0){//CUSTOMER
                 $userObject = (object) array('username' => $username, 'position' => $loginType,'customerId'=>$row['Id']);
                 session_start();
                 $_SESSION['user'] = $userObject;
+                $_SESSION['cart'] = array();
                 echo $redirPage;
             }
         }

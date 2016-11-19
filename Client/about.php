@@ -13,7 +13,7 @@
 
   
 <?php session_start(); include 'nav.php';?>
-
+<script>  $("#about").addClass("active");</script>
 
 <h1>About Us</h1><br/>
 Take a peak-at-chu favourite deals above!<br/>

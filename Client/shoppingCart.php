@@ -12,7 +12,8 @@ include './ensureCustomerAuthenticated.php';
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/removeFromCart.js"></script>
+  <script src="js/cart.js"></script>
+    <link rel="stylesheet" href="css/basket.css">
 </head>
 <body>
 
@@ -21,57 +22,71 @@ include './ensureCustomerAuthenticated.php';
 <?php include 'nav.php';?>
 <script>  $("#basket").addClass("active");</script>
 
-<h3> Your basket </h3>
+<div id="allContent">
+    <?php if (sizeof($_SESSION['cart'])==0): ?>
+        <h2>No items in cart </h2>
 
-    <?php if (sizeof($_SESSION['cart'])>0){?>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Brand</th>
-                    <th>Description</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody>
 
-            <?php
+    <?php else: ?>
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="form-inline">
+                    <button class='btn btn-primary' onclick="deleteAll()">Clear basket</button>
+                    <button class='btn btn-primary' onclick="purchase()">Purchase</button>
+
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Brand</th>
+                            <th>Description</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
                         foreach($_SESSION['cart'] as $item) {
-                                   echo "<tr data-id='".$item->Id."'>
-                                            <td>".$item -> Quantity."</td>
-                                            <td>".$item -> Price."</td>
-                                            <td>".$item -> Brand."</td>
-                                            <td>".$item -> Description."</td>
-                                            <td><button>Remove</button></td>
-                                            
-                                        </tr>";
+                            echo "<tr data-id='".$item->Id."'>
+                                        <td>".$item -> Quantity."</td>
+                                        <td>".$item -> Price."</td>
+                                        <td>".$item -> Brand."</td>
+                                        <td>".$item -> Description."</td>
+                                        <td><button onclick='deleteItem(this)'>Remove</button></td>
+                                        
+                                    </tr>";
 
                         }
-            ?>
+                        ?>
 
-            </tbody>
+                    </tbody>
 
 
-        </table>
-    <?php }?>
-<?php
+                </table>
 
 
 
+            </div>
+
+        </div>
+
+
+    <?php endif; ?>
+
+
+</div>
 
 
 
 
-?>
 
 
-<form action="deleteBasket.php">
-<button input type="submit" class='btn btn-primary'>Clear basket</button><p>
-</form>
 
-<form action="purchase.php">
-<button input type="submit" class='btn btn-primary'>Purchase</button><p>
-</form>
+
 
 </body>

@@ -1,41 +1,37 @@
-<?php 
-
-session_start();
-include '../includes/db.php';
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Rackets</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-
-
-<?php include 'nav.php';?>
-
-<h1>Rackets</h1>
-
-
 <?php
+include  "./ensureCustomerAuthenticated.php";
+include '../includes/db.php';
 
-$query ="UPDATE customer SET AvailableOnline = ?,
-..
-..
-..";
+
+if ( sizeof($_SESSION['cart'])==0){
+    die ("something went wrong!");
+}
+
+$idsToBuy = "";
+$quantitiesToBuy="";
+foreach ($_SESSION['cart'] as $item){
+    $idsToBuy = $idsToBuy.$item->Id.",";
+    $quantitiesToBuy = $quantitiesToBuy.$item->Quantity.",";
+}
+
+
+$procStr = 'CALL  updateProfileStaffProcedure("'.$idsToBuy.'","'.$quantitiesToBuy.'",'.$_SESSION['user']->customerId.')';
+
+
+$stmt = $connection->prepare($procStr);
+$stmt->execute();
+
+if ($stmt===false){//database disconnected or whatever
+    http_response_code(500);
+    die("Database error");
+}
+
+$_SESSION['cart'] = array();
+
+echo "purchased successfully!";
+
+
+
 
 
 ?>
-
-<p>
-	<h2>Purchase successful.</h2>
-</p>
-
-</body>
-</html>

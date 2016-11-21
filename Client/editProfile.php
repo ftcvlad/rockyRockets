@@ -26,7 +26,7 @@
     <script>  $("#profile").addClass("active");</script>
     <?php
 
-    include 'nav.php';
+
     include "../includes/db.php";
 
 

@@ -13,25 +13,16 @@ function addToBasket(){
         dataType: "text",
         success: function(result) {
 
-            //console.log()
-            //add "added successfully" message to somewhere
+            $("#messageDiv").html("Basket updated!");
             $("#addToBasketModal").modal('hide');
+            window.scrollTo(0, 0);
 
         },
         error:function(jqXHR, status, errorText){
 
-            // if (jqXHR.status===500){
-            //
-            //     $(".panel-heading").append("<span > database error</span>");
-            // }
-            // else if (jqXHR.status === 401){
-            //
-            //     $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
-            // }
-            // else if (jqXHR.status === 404){
-            //
-            //     $(".panel-heading").append("<span > "+jqXHR.responseText+"</span>");
-            // }
+
+            alert("unexpected error occured!");
+
 
         }
 

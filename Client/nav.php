@@ -1,8 +1,12 @@
 <script src="js/logout.js"></script>
 <link rel="stylesheet" href="./css/navStyles.css">
-<div class="jumbotron text-center">
+<div class="jumbotron text-center" >
     <h1>Rocky Rackets</h1>
     <p>Tennis equipment to make a racket about!</p>
+</div>
+
+<div id="messageDiv">
+
 </div>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -25,7 +29,9 @@
         <li><a href="womenApparel.php" id="woman">Women's Apparel</a></li>
 		<li><a href="about.php" id="about">About Us</a></li>
 
-      </ul>
+      </ul >
+
+
 	  
 <!-- Search button
     <form class ="navbar-form navbar-right">

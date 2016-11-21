@@ -1,3 +1,14 @@
 .active{
     background-color: #ffd8a1;
 }
+
+.jumbotron{
+    margin-bottom:0;
+}
+
+#messageDiv{
+    color:red;
+    text-align:center;
+    line-height: 30px;
+    background-color: palegreen;
+}

@@ -1,20 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Male Apparel</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/addToCart.js"></script>
+    <title>Male Apparel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/addToCart.js"></script>
 </head>
 <body>
 
 
-
-<?php session_start(); include 'nav.php';?>
+<?php session_start();
+include 'nav.php'; ?>
 <script>  $("#man").addClass("active");</script>
 
 <?php
@@ -47,23 +46,23 @@ $stmt = $connection->prepare($query);
 $stmt->execute();
 $res = $stmt->get_result();
 
-$i=0;
+$i = 0;
 
-while($rows=mysqli_fetch_array($res)){
+while ($rows = mysqli_fetch_array($res)) {
     $i++;
 
-    $Id= $rows['Id'];
-    $Description= $rows['Description'];
-    $Brand= $rows['Brand'];
-    $Price= $rows['Price'];
-    $ImagePath = $rows['ImagePath']==NULL?"noImage.png":$rows['ImagePath'];
+    $Id          = $rows['Id'];
+    $Description = $rows['Description'];
+    $Brand       = $rows['Brand'];
+    $Price       = $rows['Price'];
+    $ImagePath   = $rows['ImagePath'] == null ? "noImage.png" : $rows['ImagePath'];
 
 
-    $Size = $rows['Size'];
+    $Size  = $rows['Size'];
     $Color = $rows['Color'];
 
 
-    echo" 
+    echo " 
 			<div class='col-sm-6 col-md-4'>
                 <div class='thumbnail' data-desc='$Description' data-id='$Id' data-price='$Price' data-brand='$Brand' data-img='$ImagePath' data-size='$Size' data-color='$Color'>
                     <h3 style='padding: 0px 10px;' >$Description</h3>
@@ -83,55 +82,53 @@ while($rows=mysqli_fetch_array($res)){
 }
 
 
-
-
 ?>
 
-    <div class='modal ' id='addToBasketModal' tabindex='-1' role='dialog' data-id="">
-        <div class='modal-dialog' role='document'>
-            <div class='modal-content'>
-                <div class='modal-header'>
-                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+<div class='modal ' id='addToBasketModal' tabindex='-1' role='dialog' data-id="">
+    <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span
+                            aria-hidden='true'>&times;</span></button>
 
-                    <!-- Update basket -->
-                    <!-- This is the name of the product -->
-                    <h3 id="modalBrand"></h3>
-                    <h4 id="modalDescription" class='modal-title'></h4>
-                </div>
+                <!-- Update basket -->
+                <!-- This is the name of the product -->
+                <h3 id="modalBrand"></h3>
+                <h4 id="modalDescription" class='modal-title'></h4>
+            </div>
 
-                <!-- This is the image of the item -->
-                <!-- Image variable here -->
-                <div class='modal-body' align='center'>
-                    <img id="modalImg" width='300' height='300' style='padding: 10px 5px;' />
+            <!-- This is the image of the item -->
+            <!-- Image variable here -->
+            <div class='modal-body' align='center'>
+                <img id="modalImg" width='300' height='300' style='padding: 10px 5px;'/>
 
-                    <h1 id="modalPrice"></h1>
-                    ______
-                    <h3 id="modalSize"></h3>
-                    <h4 id="modalColor"></h4>
-                </div>
+                <h1 id="modalPrice"></h1>
+                ______
+                <h3 id="modalSize"></h3>
+                <h4 id="modalColor"></h4>
+            </div>
 
-                <!-- This is the divider for the buttons in the script -->
-                <div class='modal-footer form-inline' style='padding: 20px 5px;' >
+            <!-- This is the divider for the buttons in the script -->
+            <div class='modal-footer form-inline' style='padding: 20px 5px;'>
 
-                    <!-- This part offers a cancel option to close the pop-up -->
-                    <button type='button' class='btn btn-default' style='float: left;' data-dismiss='modal'>Cancel</button>
+                <!-- This part offers a cancel option to close the pop-up -->
+                <button type='button' class='btn btn-default' style='float: left;' data-dismiss='modal'>Cancel</button>
 
-                    <select name='Quantity' class='form-control' id="modalQuantity">
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='5'>5</option>
-                        <option value='10'>10</option>
-                    </select>
+                <select name='Quantity' class='form-control' id="modalQuantity">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='5'>5</option>
+                    <option value='10'>10</option>
+                </select>
 
-                    <button type='submit' class='btn btn-primary' onclick="addToBasket()" >  Add to basket</button>
+                <button type='submit' class='btn btn-primary' onclick="addToBasket()"> Add to basket</button>
 
-                </div>
+            </div>
 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 </body>

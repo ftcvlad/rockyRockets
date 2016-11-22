@@ -38,7 +38,7 @@ $query = "select purchase.Id as pID, Price,Description, Brand, Quantity, Date
         INNER JOIN purchase_has_differentitem ON purchase_has_differentitem.PurchaseId=purchase.Id
         INNER JOIN differentitem on differentitem.id=purchase_has_differentitem.ItemId
         Where purchase.customerID = ".$customerId."
-        ORDER BY Date DESC";
+        ORDER BY pID DESC";
 
 $stmt = $connection->prepare($query);
 $stmt->execute();

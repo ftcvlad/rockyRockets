@@ -99,15 +99,18 @@ while ($rows = mysqli_fetch_array($res)) {
                 <!-- This part offers a cancel option to close the pop-up -->
                 <button type='button' class='btn btn-default' style='float: left;' data-dismiss='modal'>Cancel</button>
 
-                <select name='Quantity' class='form-control' id="modalQuantity">
-                    <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option>
-                    <option value='5'>5</option>
-                    <option value='10'>10</option>
-                </select>
+                <?php if (isset($_SESSION['user']) && strcmp($_SESSION['user']->position,"customer")===0) :?>
+                    <select name='Quantity' class='form-control' id="modalQuantity">
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='5'>5</option>
+                        <option value='10'>10</option>
+                    </select>
+                    <button type='submit' class='btn btn-primary' onclick="addToBasket()"> Add to basket</button>
 
-                <button type='submit' class='btn btn-primary' onclick="addToBasket()"> Add to basket</button>
+                <?php else:?>
+                <?php endif; ?>
 
             </div>
 

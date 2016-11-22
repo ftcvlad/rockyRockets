@@ -34,26 +34,13 @@ include '../includes/db.php';
 
 
 
-$query = "SELECT differentItem.Id,
-differentItem.Description,
-differentItem.Brand,
-differentItem.Price,
-differentItem.ImagePath,
-differentItem.Discount,
-differentItem.AvailableOnline,
-racketattribute.Id,
-racketattribute.Sport,
-racketattribute.Balance,
-racketattribute.Weight
-            FROM differentItem
-			INNER JOIN racketattribute
-			ON differentItem.Id=racketattribute.Id;";
+$query = "SELECT * FROM customer_racketitems";
 
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $res = $stmt->get_result();
 
-$i=0;
+
 
 while($rows=mysqli_fetch_array($res)){
 
@@ -63,13 +50,12 @@ while($rows=mysqli_fetch_array($res)){
     $Price = $rows['Price'];
     $ImagePath = $rows['ImagePath']==NULL?"noImage.png":$rows['ImagePath'];
 
-
     $Sport = $rows['Sport'];
     $Balance = $rows['Balance'];
     $Weight = $rows['Weight'];
 
 
-    $i++;
+
 
 
     echo" 

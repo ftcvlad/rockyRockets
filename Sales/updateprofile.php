@@ -2,10 +2,6 @@
 include  "./ensureSellerAuthenticated.php";
 include '../includes/db.php';
 
-
-
-
-
 $staffId = $_SESSION['user'] -> staffId;
 $FirstName =  $_POST["FirstName"];
 $LastName =  $_POST["LastName"];

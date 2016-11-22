@@ -71,6 +71,9 @@ function purchase(){
 
             $("#messageDiv").html(result);
 
+            var allContent = $("#allContent");
+            allContent.html('');
+            allContent.append(" <h2>No items in cart </h2>");
 
 
         },

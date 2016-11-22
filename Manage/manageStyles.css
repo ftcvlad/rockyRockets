@@ -208,4 +208,6 @@ li.extraInfo{
     font-weight:bold;
 }
 
-
+.warehouseOutOfStock{
+    background-color:peachpuff;
+}

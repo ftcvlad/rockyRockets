@@ -27,6 +27,7 @@
         <li><a href="rackets.php" id="racket">Rackets</a></li>
         <li><a href="menApparel.php" id="man">Men's Apparel</a></li>
         <li><a href="womenApparel.php" id="woman">Women's Apparel</a></li>
+        <li><a href="otherEquipment.php" id="other">Equipment</a></li>
 		<li><a href="about.php" id="about">About Us</a></li>
 
       </ul >

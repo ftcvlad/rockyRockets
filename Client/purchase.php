@@ -15,7 +15,7 @@ foreach ($_SESSION['cart'] as $item){
 }
 
 
-$procStr = 'CALL  updateProfileStaffProcedure("'.$idsToBuy.'","'.$quantitiesToBuy.'",'.$_SESSION['user']->customerId.')';
+$procStr = 'CALL  purchaseItems("'.$idsToBuy.'","'.$quantitiesToBuy.'",'.$_SESSION['user']->customerId.')';
 
 
 $stmt = $connection->prepare($procStr);

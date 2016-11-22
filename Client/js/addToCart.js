@@ -55,6 +55,9 @@ function addModal(target, type){
         $("#modalWeight").text(selectedThumb.data("weight"));
         $("#modalBalance").text(selectedThumb.data("balance"));
     }
+    else if (type===3){
+        //nothing
+    }
 
     $("#addToBasketModal").modal("show");
 

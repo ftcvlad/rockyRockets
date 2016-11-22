@@ -74,6 +74,12 @@ function searchItemsToOrder(){
                 var description = resultItems[i].Description;
                 var quantity = resultItems[i].Quantity==null?0:resultItems[i].Quantity;
 
+                //if quantity of items at your location <0 this indicated you should order immediately to serve purchase
+                var dangerClass = "";
+                if (quantity<0){
+                    dangerClass = "warehouseOutOfStock";
+                }
+
                 var extraLi = "";
                 if (resultItems[i].Sport!==undefined){//racket
 
@@ -109,7 +115,7 @@ function searchItemsToOrder(){
 
 
                 $("#resultHolder").append('' +
-                        '<div class="rowDiv" data-id="'+resultItems[i].itemId+'">'+
+                        '<div class="rowDiv '+dangerClass+'" data-id="'+resultItems[i].itemId+'">'+
                             '<div class="dataDiv col-xs-10" >'+
                                 '<img src="../../ItemPictures/'+imageSrc+'">'+
                                 '<ul>'+
@@ -180,10 +186,17 @@ function orderItem(elem){
         dataType: "text",
         success: function(addedQuantity) {
 
-
             targetInput.val('');
-            var currentAmountElem = $(elem).closest(".rowDiv").find(".quantitySpan");
-            currentAmountElem.text(parseInt(currentAmountElem.text())+parseInt(addedQuantity));
+            var rowDiv = $(elem).closest(".rowDiv");
+            var currentAmountElem = rowDiv.find(".quantitySpan");
+
+
+            var newQuantity = parseInt(currentAmountElem.text())+parseInt(addedQuantity);
+            if (newQuantity>=0 && rowDiv.hasClass("warehouseOutOfStock")){
+                rowDiv.removeClass("warehouseOutOfStock");
+            }
+
+            currentAmountElem.text(newQuantity);
 
             $(".panel-heading").append("<span> "+"Done"+"</span>");
 

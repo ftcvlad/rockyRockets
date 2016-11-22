@@ -12,3 +12,21 @@
     line-height: 30px;
     background-color: palegreen;
 }
+
+.navbar-collapse{
+    padding:0;
+}
+
+#thumbnailHolder{
+    width: 90%;
+
+    overflow: auto;
+    margin: auto;
+    margin-bottom: 100px;
+}
+
+.thumbnail{
+    overflow:auto;
+    min-height:400px;
+}
+

@@ -16,6 +16,7 @@
 include 'nav.php'; ?>
 <script>  $("#man").addClass("active");</script>
 
+<div id="thumbnailHolder">
 <?php
 
 include '../includes/db.php';
@@ -45,13 +46,13 @@ while ($rows = mysqli_fetch_array($res)) {
 
 
     echo " 
-			<div class='col-sm-6 col-md-4'>
+			<div class='col-sm-6 col-md-4 '>
                 <div class='thumbnail' data-desc='$Description' data-id='$Id' data-price='$Price' data-brand='$Brand' data-img='$ImagePath' data-size='$Size' data-color='$Color'>
                     <h3 style='padding: 0px 10px;' >$Description</h3>
                     <h4 style='padding: 0px 10px;'>£$Price</h3>
                     <h4 style='padding: 0px 10px;'>$Brand</h3>
                   
-                    <img src=../ItemPictures/$ImagePath width='300' height='300' style='padding: 10px 5px;' />
+                    <img src=../ItemPictures/$ImagePath width='200' height='200' style='padding: 10px 5px;' />
                     
                     <!-- More info button to see more information about the product, buy it, etc. -->
                     <button type='button' class='btn btn-primary btn-lg' onclick='addModal(this, 1)' >More info</button>
@@ -59,12 +60,14 @@ while ($rows = mysqli_fetch_array($res)) {
                 </div>
 			</div>	
 			
+			
 	  
 	  ";
 }
 
 
 ?>
+</div>
 
 <div class='modal ' id='addToBasketModal' tabindex='-1' role='dialog' data-id="">
     <div class='modal-dialog' role='document'>
@@ -82,7 +85,7 @@ while ($rows = mysqli_fetch_array($res)) {
             <!-- This is the image of the item -->
             <!-- Image variable here -->
             <div class='modal-body' align='center'>
-                <img id="modalImg" width='300' height='300' style='padding: 10px 5px;'/>
+                <img id="modalImg" width='200' height='200' style='padding: 10px 5px;'/>
 
                 <h1 id="modalPrice"></h1>
                 ______

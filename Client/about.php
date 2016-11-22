@@ -15,9 +15,13 @@
 <?php session_start(); include 'nav.php';?>
 <script>  $("#about").addClass("active");</script>
 
-<h1>About Us</h1><br/>
-Take a peak-at-chu favourite deals above!<br/>
-<img src="https://66.media.tumblr.com/708a05c454e1bfe5c17a8e535823720b/tumblr_nn0mrr5Dh51tqptlzo2_500.gif">
+
+<div style="width:80%;margin:auto;margin-bottom: 100px;">
+    <h1>About Us</h1><br/>
+    Take a peak-at-chu favourite deals above!<br/>
+    <img src="https://66.media.tumblr.com/708a05c454e1bfe5c17a8e535823720b/tumblr_nn0mrr5Dh51tqptlzo2_500.gif">
+</div>
+
 
 
 </body>

@@ -1,0 +1,14 @@
+.panel{
+    width:80%;
+    margin:auto;
+    margin-bottom:100px;
+}
+
+.evenPurchase{
+    background-color: rgba(112, 128, 144, 0.16);
+}
+
+table thead tr{
+    background-color: slategrey;
+}
+
